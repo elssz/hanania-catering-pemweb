@@ -34,7 +34,7 @@
                     <div class="col-md-3 menu-item" data-category="Makanan">
                         <div class="card menu-card text-center">
                             <a href="detail.html" class="text-decoration-none text-dark">
-                                <img src="img/sate.jpg" class="card-img-top" alt="Sate Kambing">
+                                <img src="{{ asset('images/img/sate.jpg') }}" class="card-img-top" alt="Sate Kambing">
                                 <div class="card-body">
                                     <h5 class="menu-title">Sate Kambing</h5>
                                     <p class="menu-desc">Daging empuk bumbu kacang khas Hanania</p>
