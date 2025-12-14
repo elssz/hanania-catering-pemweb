@@ -20,15 +20,19 @@
         <div class="card p-4 shadow" style="width: 420px; border-radius: 15px;">
             <h3 class="text-center mb-3 text-bata fw-bold">Login</h3>
 
-            <form>
+            <form method="POST" action="{{ route('login.post') }}">
+                @csrf
+
                 <div class="mb-3">
                     <label class="form-label">Email</label>
-                    <input type="email" class="form-control" placeholder="Masukkan email kamu">
+                    <input name="email" value="{{ old('email') }}" type="email" class="form-control @error('email') is-invalid @enderror" placeholder="Masukkan email kamu">
+                    @error('email')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Password</label>
-                    <input type="password" class="form-control" placeholder="Masukkan password">
+                    <input name="password" type="password" class="form-control @error('password') is-invalid @enderror" placeholder="Masukkan password">
+                    @error('password')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
 
                 <button type="submit" class="btn btn-hanania w-100 mt-2">

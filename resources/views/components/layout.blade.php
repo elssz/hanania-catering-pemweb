@@ -12,11 +12,9 @@
 
 <body>
 
-    <div>
-        <!-- navbar -->
+    <div class="d-flex flex-column min-vh-100">
         <nav class="navbar navbar-expand-lg navbar-custom px-4">
             <div class="container-fluid">
-                <!-- Logo & Brand -->
                 <a class="navbar-brand d-flex align-items-center" href="#">
                     <img src="{{ asset('images\logo.jpg') }}" alt="Logo" width="40" class="me-2">
                     <span class="fw-bold text-white">Hanania Katering</span>
@@ -31,6 +29,13 @@
                 <!-- Menu -->
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                     <ul class="navbar-nav gap-3">
+                        @auth
+                            @if(optional(auth()->user()->role)->name === 'admin')
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="{{ route('admin.dashboard') }}">Admin Dashboard</a>
+                                </li>
+                            @endif
+                        @endauth
                         <li class="nav-item">
                             <a class="nav-link active" href="{{ route('home') }}">Beranda</a>
                         </li>
@@ -43,23 +48,29 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('pesanan') }}">Pesanan</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">Login</a>
-                        </li>
+                        @guest
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">Login</a>
+                            </li>
+                        @endguest
+
+                        @auth
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('logout') }}">Logout</a>
+                            </li>
+                        @endauth
                     </ul>
                 </div>
             </div>
         </nav>
-    </div>
 
-    <!-- isian -->
-    <div>{{ $slot }}</div>
+    <main class="flex-fill">{{ $slot }}</main>
 
-    <!-- ==================== FOOTER ==================== -->
-    <footer class="text-center py-4 text-dark">
+    <footer class="text-center py-4 text-light mt-auto">
         <small>© 2025 Hanania Katering. All Rights Reserved.</small>
     </footer>
 
+</div>
 </body>
 
 </html>

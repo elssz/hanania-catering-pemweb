@@ -20,31 +20,36 @@
         <div class="card p-4 shadow" style="width: 450px; border-radius: 15px;">
             <h3 class="text-center mb-3 text-bata fw-bold">Daftar Akun</h3>
 
-            <form>
+            <form method="POST" action="{{ route('register.post') }}">
+                @csrf
 
                 <div class="mb-3">
                     <label class="form-label">Nama Lengkap</label>
-                    <input type="text" class="form-control" placeholder="Masukkan nama kamu">
+                    <input name="nama" value="{{ old('nama') }}" type="text" class="form-control @error('nama') is-invalid @enderror" placeholder="Masukkan nama kamu">
+                    @error('nama')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Email</label>
-                    <input type="email" class="form-control" placeholder="Masukkan email">
+                    <input name="email" value="{{ old('email') }}" type="email" class="form-control @error('email') is-invalid @enderror" placeholder="Masukkan email">
+                    @error('email')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Nomor Telepon</label>
-                    <input type="text" class="form-control" placeholder="08xxxxxxxxxx">
+                    <input name="phone" value="{{ old('phone') }}" type="text" class="form-control @error('phone') is-invalid @enderror" placeholder="08xxxxxxxxxx">
+                    @error('phone')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Password</label>
-                    <input type="password" class="form-control" placeholder="Buat password">
+                    <input name="password" type="password" class="form-control @error('password') is-invalid @enderror" placeholder="Buat password">
+                    @error('password')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Konfirmasi Password</label>
-                    <input type="password" class="form-control" placeholder="Ulangi password">
+                    <input name="password_confirmation" type="password" class="form-control" placeholder="Ulangi password">
                 </div>
 
                 <button type="submit" class="btn btn-hanania w-100 mt-2">
