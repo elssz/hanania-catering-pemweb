@@ -30,11 +30,11 @@
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                     <ul class="navbar-nav gap-3">
                         @auth
-                            @if(optional(auth()->user()->role)->name === 'admin')
-                                <li class="nav-item">
-                                    <a class="nav-link active" href="{{ route('admin.dashboard') }}">Admin Dashboard</a>
-                                </li>
-                            @endif
+                        @if(optional(auth()->user()->role)->name === 'admin')
+                        <li class="nav-item">
+                            <a class="nav-link active" href="{{ route('admin.dashboard') }}">Admin Dashboard</a>
+                        </li>
+                        @endif
                         @endauth
                         <li class="nav-item">
                             <a class="nav-link active" href="{{ route('home') }}">Beranda</a>
@@ -46,31 +46,31 @@
                             <a class="nav-link" href="{{ route('keranjang') }}">Keranjang</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('pesanan') }}">Pesanan</a>
+                            <a class="nav-link" href="{{ route('transaksi-saya') }}">Riwayat</a>
                         </li>
                         @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">Login</a>
-                            </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">Login</a>
+                        </li>
                         @endguest
 
                         @auth
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('logout') }}">Logout</a>
-                            </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('logout') }}">Logout</a>
+                        </li>
                         @endauth
                     </ul>
                 </div>
             </div>
         </nav>
 
-    <main class="flex-fill">{{ $slot }}</main>
+        <main class="flex-fill">{{ $slot }}</main>
 
-    <footer class="text-center py-4 text-light mt-auto">
-        <small>© 2025 Hanania Katering. All Rights Reserved.</small>
-    </footer>
+        <footer class="text-center py-4 text-light mt-auto">
+            <small>© 2025 Hanania Katering. All Rights Reserved.</small>
+        </footer>
 
-</div>
+    </div>
 </body>
 
 </html>

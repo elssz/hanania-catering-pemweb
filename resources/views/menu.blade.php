@@ -15,180 +15,26 @@
         <section class="py-5 bg-light">
             <div class="container">
                 <div class="row g-4" id="menuList">
-
-                    <!-- SNACK -->
-                    <div class="col-md-3 menu-item" data-category="Snack">
-                        <div class="card menu-card text-center">
-                            <a href="detail.html" class="text-decoration-none text-dark">
-                                <img src="img/mochifilling.jpg" class="card-img-top" alt="Mochi">
-                                <div class="card-body">
-                                    <h5 class="menu-title">Mochi Filling</h5>
-                                    <p class="menu-desc">Stroberi, oreo, mangga</p>
-                                </div>
-                            </a>
-                            <button class="btn btn-hanania add-to-cart">+ Tambah Pesanan</button>
+                    @if(isset($menus) && $menus->isNotEmpty())
+                        @foreach($menus as $menu)
+                        <div class="col-md-3 menu-item" data-category="{{ $menu->kategori }}">
+                            <div class="card menu-card text-center">
+                                <a href="#" class="text-decoration-none text-dark">
+                                    <img src="{{ asset('images/menu-placeholder.jpg') }}" class="card-img-top" alt="{{ $menu->namaMenu }}">
+                                    <div class="card-body">
+                                        <h5 class="menu-title">{{ $menu->namaMenu }}</h5>
+                                        <p class="menu-desc">Rp {{ number_format($menu->harga, 0, ',', '.') }}</p>
+                                    </div>
+                                </a>
+                                <button class="btn btn-hanania add-to-cart" data-id="{{ $menu->id }}">+ Tambah Pesanan</button>
+                            </div>
                         </div>
-                    </div>
-
-                    <!-- MAKANAN -->
-                    <div class="col-md-3 menu-item" data-category="Makanan">
-                        <div class="card menu-card text-center">
-                            <a href="detail.html" class="text-decoration-none text-dark">
-                                <img src="{{ asset('images/img/sate.jpg') }}" class="card-img-top" alt="Sate Kambing">
-                                <div class="card-body">
-                                    <h5 class="menu-title">Sate Kambing</h5>
-                                    <p class="menu-desc">Daging empuk bumbu kacang khas Hanania</p>
-                                </div>
-                            </a>
-                            <button class="btn btn-hanania add-to-cart">+ Tambah Pesanan</button>
+                        @endforeach
+                    @else
+                        <div class="col-12">
+                            <div class="alert alert-info">Belum ada menu tersedia.</div>
                         </div>
-                    </div>
-
-                    <div class="col-md-3 menu-item" data-category="Makanan">
-                        <div class="card menu-card text-center">
-                            <a href="detail.html" class="text-decoration-none text-dark">
-                                <img src="img/Sate Ayam.jpg" class="card-img-top" alt="Sate Ayam">
-                                <div class="card-body">
-                                    <h5 class="menu-title">Sate Ayam</h5>
-                                    <p class="menu-desc">Ayam panggang dengan saus kacang gurih</p>
-                                </div>
-                            </a>
-                            <button class="btn btn-hanania add-to-cart">+ Tambah Pesanan</button>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3 menu-item" data-category="Makanan">
-                        <div class="card menu-card text-center">
-                            <a href="detail.html" class="text-decoration-none text-dark">
-                                <img src="img/GulaiKambing.jpg" class="card-img-top" alt="Gulai Kambing">
-                                <div class="card-body">
-                                    <h5 class="menu-title">Gulai Kambing</h5>
-                                    <p class="menu-desc">Kuah kental rempah khas tradisional</p>
-                                </div>
-                            </a>
-                            <button class="btn btn-hanania add-to-cart">+ Tambah Pesanan</button>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3 menu-item" data-category="Makanan">
-                        <div class="card menu-card text-center">
-                            <a href="detail.html" class="text-decoration-none text-dark">
-                                <img src="img/sopiga.jpg" class="card-img-top" alt="Sop Iga Sapi">
-                                <div class="card-body">
-                                    <h5 class="menu-title">Sop Iga Sapi</h5>
-                                    <p class="menu-desc">Iga sapi lembut kuah gurih</p>
-                                </div>
-                            </a>
-                            <button class="btn btn-hanania add-to-cart">+ Tambah Pesanan</button>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3 menu-item" data-category="Makanan">
-                        <div class="card menu-card text-center">
-                            <a href="detail.html" class="text-decoration-none text-dark">
-                                <img src="img/sopkikil.jpg" class="card-img-top" alt="Sup Kikil Kambing">
-                                <div class="card-body">
-                                    <h5 class="menu-title">Sup Kikil Kambing</h5>
-                                    <p class="menu-desc">Kikil empuk dengan bumbu segar</p>
-                                </div>
-                            </a>
-                            <button class="btn btn-hanania add-to-cart">+ Tambah Pesanan</button>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3 menu-item" data-category="Makanan">
-                        <div class="card menu-card text-center">
-                            <a href="detail.html" class="text-decoration-none text-dark">
-                                <img src="img/nasigorengkambing.jpg" class="card-img-top" alt="Nasi Goreng Kambing">
-                                <div class="card-body">
-                                    <h5 class="menu-title">Nasi Goreng Kambing</h5>
-                                    <p class="menu-desc">Nasi goreng bumbu rempah khas Timur Tengah</p>
-                                </div>
-                            </a>
-                            <button class="btn btn-hanania add-to-cart">+ Tambah Pesanan</button>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3 menu-item" data-category="Makanan">
-                        <div class="card menu-card text-center">
-                            <a href="detail.html" class="text-decoration-none text-dark">
-                                <img src="img/hero.jpg" class="card-img-top" alt="Nasi Box">
-                                <div class="card-body">
-                                    <h5 class="menu-title">Nasi Box</h5>
-                                    <p class="menu-desc">Nasi kuning, liwet, bisa request lauk</p>
-                                </div>
-                            </a>
-                            <button class="btn btn-hanania add-to-cart">+ Tambah Pesanan</button>
-                        </div>
-                    </div>
-
-                    <!-- TUMPENG -->
-                    <div class="col-md-3 menu-item" data-category="Tumpeng">
-                        <div class="card menu-card text-center">
-                            <a href="detail.html" class="text-decoration-none text-dark">
-                                <img src="img/tumpeng.jpg" class="card-img-top" alt="Nasi Tumpeng">
-                                <div class="card-body">
-                                    <h5 class="menu-title">Nasi Tumpeng</h5>
-                                    <p class="menu-desc">Tersedia ukuran besar dan kecil</p>
-                                </div>
-                            </a>
-                            <button class="btn btn-hanania add-to-cart">+ Tambah Pesanan</button>
-                        </div>
-                    </div>
-
-                    <!-- MINUMAN -->
-                    <div class="col-md-3 menu-item" data-category="Minuman">
-                        <div class="card menu-card text-center">
-                            <a href="detail.html" class="text-decoration-none text-dark">
-                                <img src="img/esteler.jpg" class="card-img-top" alt="Es Teler">
-                                <div class="card-body">
-                                    <h5 class="menu-title">Es Teler All Mix</h5>
-                                    <p class="menu-desc">Campuran buah segar, susu, dan kelapa muda</p>
-                                </div>
-                            </a>
-                            <button class="btn btn-hanania add-to-cart">+ Tambah Pesanan</button>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3 menu-item" data-category="Minuman">
-                        <div class="card menu-card text-center">
-                            <a href="detail.html" class="text-decoration-none text-dark">
-                                <img src="img/Es Melon Biji Selasih.jpg" class="card-img-top" alt="Es Melon Selasih">
-                                <div class="card-body">
-                                    <h5 class="menu-title">Es Melon Selasih</h5>
-                                    <p class="menu-desc">Segarnya perpaduan melon dan biji selasih</p>
-                                </div>
-                            </a>
-                            <button class="btn btn-hanania add-to-cart">+ Tambah Pesanan</button>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3 menu-item" data-category="Minuman">
-                        <div class="card menu-card text-center">
-                            <a href="detail.html" class="text-decoration-none text-dark">
-                                <img src="img/es degan.jpg" class="card-img-top" alt="Es Degan">
-                                <div class="card-body">
-                                    <h5 class="menu-title">Es Degan</h5>
-                                    <p class="menu-desc">Kelapa muda asli segar alami</p>
-                                </div>
-                            </a>
-                            <button class="btn btn-hanania add-to-cart">+ Tambah Pesanan</button>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3 menu-item" data-category="Minuman">
-                        <div class="card menu-card text-center">
-                            <a href="detail.html" class="text-decoration-none text-dark">
-                                <img src="img/lemontea.jpg" class="card-img-top" alt="Lemon Tea">
-                                <div class="card-body">
-                                    <h5 class="menu-title">Lemon Tea</h5>
-                                    <p class="menu-desc">Teh lemon segar disajikan dingin</p>
-                                </div>
-                            </a>
-                            <button class="btn btn-hanania add-to-cart">+ Tambah Pesanan</button>
-                        </div>
-                    </div>
-
+                    @endif
                 </div>
             </div>
         </section>

@@ -36,7 +36,8 @@ Route::get('/layout', function () {
 });
 
 Route::get('/menu', function () {
-    return view('menu');
+    $menus = \App\Models\Menu::orderBy('kategori')->orderBy('namaMenu')->get();
+    return view('menu', compact('menus'));
 })->name('menu');
 
 Route::get('/keranjang', function () {
@@ -47,6 +48,12 @@ Route::get('/keranjang', function () {
 Route::get('/pesanan', function () {
     return view('pesanan');
 })->name('pesanan');
+
+// viewtransaksi
+use App\Http\Controllers\User\TransactionController;
+Route::get('/transaksi-saya', [TransactionController::class, 'index'])
+    ->middleware('auth')->name('transaksi-saya');
+
 
 use App\Http\Controllers\Admin\MenuController;
 
