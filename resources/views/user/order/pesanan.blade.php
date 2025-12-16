@@ -3,40 +3,62 @@
     <section class="py-5">
         <div class="container">
             <h2 class="fw-bold mb-4 text-center">Form Pemesanan</h2>
-            <div class="row justify-content-center">
+            <div class="row">
                 <div class="col-md-6">
-                    <form id="formPesanan">
+                    <form id="formPesanan" action="{{ route('checkout') }}" method="POST">
+                        @csrf
                         <div class="mb-3">
                             <label class="form-label">Nama Lengkap</label>
                             <input
+                                name="name"
+                                id="inputName"
                                 type="text"
                                 class="form-control"
                                 placeholder="Masukkan nama kamu"
+                                value="{{ auth()->user()->name ?? '' }}"
                                 required />
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Nomor Telepon</label>
                             <input
+                                name="phone"
+                                id="inputPhone"
                                 type="text"
                                 class="form-control"
                                 placeholder="08xxxxxxxxxx"
+                                value="{{ auth()->user()->phone ?? '' }}"
                                 required />
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Alamat Pengiriman</label>
-                            <textarea class="form-control" rows="3" required></textarea>
+                            <textarea name="address" id="inputAddress" class="form-control" rows="3" required></textarea>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Tanggal Pemesanan</label>
-                            <input type="date" class="form-control" required />
+                            <input name="date" id="inputDate" type="date" class="form-control" required />
                         </div>
+
                         <button
                             type="submit"
-                            class="btn btn-primary w-100"
+                            class="btn btn-hanania w-100 fw-semibold rounded-pill py-2"
                             id="ajukanPesanan">
                             Ajukan Pesanan
                         </button>
                     </form>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card border-0 shadow-sm rounded-4 p-3">
+                        <h5 class="fw-bold mb-3">Rincian Pesanan</h5>
+                        <div id="orderSummary">
+                            <p class="text-muted">Belum ada item di keranjang.</p>
+                        </div>
+                        <hr />
+                        <div class="d-flex justify-content-between">
+                            <strong>Subtotal</strong>
+                            <strong id="orderSubtotal">Rp0</strong>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -72,39 +94,5 @@
         </div>
     </div>
 
-    <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="script.js"></script>
-
-    <script>
-        document
-            .getElementById("formPesanan")
-            .addEventListener("submit", function(event) {
-                event.preventDefault(); // cegah reload halaman
-
-                // ambil semua input
-                const inputs = this.querySelectorAll("input[required]");
-                let lengkap = true;
-
-                inputs.forEach((input) => {
-                    if (!input.value.trim()) {
-                        lengkap = false;
-                        input.classList.add("is-invalid");
-                    } else {
-                        input.classList.remove("is-invalid");
-                    }
-                });
-
-                if (lengkap) {
-                    // tampilkan popupmodal
-                    const popup = new bootstrap.Modal(
-                        document.getElementById("popupBerhasil")
-                    );
-                    popup.show();
-                    // reset form setelah sukses
-                    this.reset();
-                } else {
-                    alert("Harap isi semua data terlebih dahulu 🙏");
-                }
-            });
-    </script>
+    <script src="{{ asset('bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 </x-layout>

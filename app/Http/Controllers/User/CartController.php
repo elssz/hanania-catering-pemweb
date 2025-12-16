@@ -1,0 +1,104 @@
+<?php
+
+namespace App\Http\Controllers\User;
+
+use App\Http\Controllers\Controller;
+use App\Models\Order;
+use App\Models\OrderItem;
+use App\Models\Menu;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
+class CartController extends Controller
+{
+    public function addToCart(Request $request, $menuId)
+    {
+        $menu = Menu::findOrFail($menuId);
+
+        $qty = (int) $request->input('qty', 1);
+        if ($qty < 1) $qty = 1;
+
+        // 1️⃣ Ambil / buat cart
+        $cart = Order::where('user_id', auth()->id())
+            ->where('status', 'cart')
+            ->first();
+
+        if (!$cart) {
+            $cart = Order::create([
+                'user_id' => auth()->id(),
+                'status' => 'cart',
+                'total' => 0
+            ]);
+        }
+
+        // 2️⃣ Cek item di cart
+        $item = OrderItem::where('order_id', $cart->id)
+            ->where('menu_id', $menu->id)
+            ->first();
+
+        if ($item) {
+            // 🔁 Update qty
+            $item->quantity = $item->quantity + $qty;
+            $item->subtotal = $item->quantity * $item->price;
+            $item->save();
+        } else {
+            // ➕ Tambah item baru
+            OrderItem::create([
+                'order_id' => $cart->id,
+                'menu_id' => $menu->id,
+                'quantity' => $qty,
+                'price' => $menu->harga,
+                'subtotal' => $menu->harga * $qty
+            ]);
+        }
+
+        // 3️⃣ Update total cart
+        $cart->total = OrderItem::where('order_id', $cart->id)
+            ->sum(DB::raw('quantity * price'));
+
+        $cart->save();
+
+        return redirect()->route('keranjang')->with('success', 'Menu ditambahkan ke keranjang');
+    }
+
+    // Checkout - convert cart to order
+    public function checkout(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'phone' => 'required|string|max:20',
+            'address' => 'required|string|max:500',
+            'date' => 'required|date|after_or_equal:today',
+        ]);
+
+        // Get user's cart
+        $cart = Order::where('user_id', auth()->id())
+            ->where('status', 'cart')
+            ->first();
+
+        if (!$cart || $cart->items->isEmpty()) {
+            return back()->with('error', 'Keranjang Anda kosong.');
+        }
+
+        // Update order with user info and change status to pending
+        $cart->status = 'pending';
+        $cart->save();
+
+        // Update user info if needed
+        $user = auth()->user();
+        $user->phone = $validated['phone'];
+        $user->save();
+
+        return redirect()->route('user.order.confirmation', $cart->id)->with('success', 'Pesanan berhasil dibuat!');
+    }
+
+    // Show order confirmation
+    public function confirmation($orderId)
+    {
+        $order = Order::with(['items.menu', 'user'])
+            ->where('user_id', auth()->id())
+            ->findOrFail($orderId);
+
+        return view('user.order.confirmation', compact('order'));
+    }
+}

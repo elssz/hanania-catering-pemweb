@@ -41,18 +41,44 @@ Route::get('/menu', function () {
 })->name('menu');
 
 Route::get('/keranjang', function () {
-    return view('keranjang');
+    $cart = null;
+    if (auth()->check()) {
+        $cart = \App\Models\Order::with(['items.menu'])
+            ->where('user_id', auth()->id())
+            ->where('status', 'cart')
+            ->first();
+    }
+    return view('user.order.keranjang', compact('cart'));
 })->name('keranjang');
 
 
 Route::get('/pesanan', function () {
-    return view('pesanan');
-})->name('pesanan');
+    $cart = null;
+    if (auth()->check()) {
+        $cart = \App\Models\Order::with(['items.menu'])
+            ->where('user_id', auth()->id())
+            ->where('status', 'cart')
+            ->first();
+    }
+    return view('user.order.pesanan', compact('cart'));
+})->name('pesanan')->middleware('auth');
+
+
+// Checkout & Confirmation routes
+use App\Http\Controllers\User\CartController;
+Route::post('/checkout', [CartController::class, 'checkout'])->name('checkout')->middleware('auth');
+Route::get('/order/{orderId}/confirmation', [CartController::class, 'confirmation'])->name('order.confirmation')->middleware('auth');
 
 // viewtransaksi
 use App\Http\Controllers\User\TransactionController;
 Route::get('/transaksi-saya', [TransactionController::class, 'index'])
     ->middleware('auth')->name('transaksi-saya');
+
+//cart.add
+
+Route::post('/cart/add/{menuId}', [CartController::class, 'addToCart'])
+     ->name('cart.add')
+     ->middleware('auth');
 
 
 use App\Http\Controllers\Admin\MenuController;
