@@ -36,18 +36,22 @@
                         </li>
                         @endif
                         @endauth
-                        <li class="nav-item">
+
+                        @if (optional(auth()->user()->role)->name != "admin")
+                            <li class="nav-item">
                             <a class="nav-link active" href="{{ route('home') }}">Beranda</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('menu') }}">Menu Katering</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('keranjang') }}">Keranjang</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('transaksi-saya') }}">Riwayat</a>
-                        </li>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('menu') }}">Menu Katering</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('keranjang') }}">Keranjang</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('transaksi-saya') }}">Riwayat</a>
+                            </li>
+                        @endif
+                        
                         @guest
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('login') }}">Login</a>
