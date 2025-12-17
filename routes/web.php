@@ -43,10 +43,10 @@ Route::get('/menu', function () {
 Route::get('/keranjang', function () {
     $cart = null;
     if (auth()->check()) {
-        $cart = \App\Models\Order::with(['items.menu'])
-            ->where('user_id', auth()->id())
-            ->where('status', 'cart')
-            ->first();
+            $cart = \App\Models\Order::with(['items.menu'])
+                ->where('user_id', auth()->id())
+                ->where('status_order', 'cart')
+                ->first();
     }
     return view('user.order.keranjang', compact('cart'));
 })->name('keranjang');
@@ -57,7 +57,7 @@ Route::get('/pesanan', function () {
     if (auth()->check()) {
         $cart = \App\Models\Order::with(['items.menu'])
             ->where('user_id', auth()->id())
-            ->where('status', 'cart')
+            ->where('status_order', 'cart')
             ->first();
     }
     return view('user.order.pesanan', compact('cart'));
@@ -87,6 +87,11 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('/', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
 
     Route::resource('menus', MenuController::class);
+
+    // Orders
+    Route::get('orders', [\App\Http\Controllers\Admin\OrderController::class, 'index'])->name('orders.index');
+    Route::get('orders/{order}', [\App\Http\Controllers\Admin\OrderController::class, 'show'])->name('orders.show');
+    Route::post('orders/{order}/update-status', [\App\Http\Controllers\Admin\OrderController::class, 'updateStatus'])->name('orders.updateStatus');
 
     // Transactions
     Route::get('transactions', [\App\Http\Controllers\Admin\TransactionController::class, 'index'])->name('transactions.index');

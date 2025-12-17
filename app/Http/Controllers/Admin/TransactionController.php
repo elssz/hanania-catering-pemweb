@@ -32,9 +32,9 @@ class TransactionController extends Controller
             $transaction->verified_at = now();
             $transaction->save();
 
-            // update order status
+            // update order payment status
             $order = $transaction->order;
-            $order->status = 'paid';
+            $order->status_payment = 'paid';
             $order->save();
 
             return redirect()->route('admin.transactions.index')->with('success', 'Transaksi berhasil diverifikasi');
@@ -47,7 +47,7 @@ class TransactionController extends Controller
             $transaction->save();
 
             $order = $transaction->order;
-            $order->status = 'awaiting_payment';
+            $order->status_payment = 'awaiting_payment';
             $order->save();
 
             return redirect()->route('admin.transactions.index')->with('success', 'Transaksi ditolak');

@@ -28,7 +28,10 @@ class OrdersTableSeeder extends Seeder
             $orderId = DB::table('orders')->insertGetId([
                 'user_id' => $userId,
                 'total' => 0,
-                'status' => 'awaiting_payment',
+                // status_payment tracks payment (awaiting_payment, paid)
+                'status_payment' => 'awaiting_payment',
+                // status_order tracks order lifecycle (pending, processing, acc, reject, completed, cancelled)
+                'status_order' => 'pending',
                 'created_at' => $createdAt,
                 'updated_at' => $createdAt,
             ]);
@@ -73,7 +76,7 @@ class OrdersTableSeeder extends Seeder
                 ]);
 
                 if ($status === 'verified') {
-                    DB::table('orders')->where('id', $orderId)->update(['status' => 'paid']);
+                    DB::table('orders')->where('id', $orderId)->update(['status_payment' => 'paid']);
                     DB::table('transactions')->where('id', $txnId)->update([
                         'verified_by' => DB::table('users')->where('role_id', DB::table('roles')->where('name', 'admin')->value('id'))->value('id'),
                         'verified_at' => (clone $txnCreatedAt)->addHours(rand(1, 48)),

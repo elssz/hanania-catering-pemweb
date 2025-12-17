@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->double('total')->default(0);
-            $table->string('status')->default('pending'); // pending, awaiting_payment, paid, preparing, completed, cancelled
+            $table->string('status_payment')->default('pending'); // pending, awaiting_payment, paid
+            $table->string('status_order')->default('processing'); // cart, pending, acc, reject, processing, completed, cancelled
             $table->timestamps();
         });
     }

@@ -4,6 +4,7 @@
 
         <div class="card p-4 mb-4">
             <a href="{{ route('admin.menus.index') }}" class="btn btn-primary mb-3">Kelola Menu</a>
+            <a href="{{ route('admin.orders.index') }}" class="btn btn-info mb-3">Kelola Order</a>
             <a href="{{ route('admin.transactions.index') }}" class="btn btn-secondary mb-3 ms-2">Kelola Transaksi</a>
 
             <p>Selamat datang, admin. Gunakan fitur di bawah untuk memantau penjualan dan transaksi bulan terakhir.</p>

@@ -20,13 +20,13 @@ class CartController extends Controller
 
         // 1️⃣ Ambil / buat cart
         $cart = Order::where('user_id', auth()->id())
-            ->where('status', 'cart')
+            ->where('status_order', 'cart')
             ->first();
 
         if (!$cart) {
             $cart = Order::create([
                 'user_id' => auth()->id(),
-                'status' => 'cart',
+                'status_order' => 'cart',
                 'total' => 0
             ]);
         }
@@ -73,7 +73,7 @@ class CartController extends Controller
 
         // Get user's cart
         $cart = Order::where('user_id', auth()->id())
-            ->where('status', 'cart')
+            ->where('status_order', 'cart')
             ->first();
 
         if (!$cart || $cart->items->isEmpty()) {
@@ -81,7 +81,7 @@ class CartController extends Controller
         }
 
         // Update order with user info and change status to pending
-        $cart->status = 'pending';
+        $cart->status_order = 'pending';
         $cart->save();
 
         // Update user info if needed

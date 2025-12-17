@@ -29,7 +29,8 @@ class OrderTransactionSeeder extends Seeder
         $orderId = DB::table('orders')->insertGetId([
             'user_id' => $userId,
             'total' => $menu->harga,
-            'status' => 'awaiting_payment',
+            'status_payment' => 'awaiting_payment',
+            'status_order' => 'pending',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
