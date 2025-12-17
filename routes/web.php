@@ -21,6 +21,10 @@ Route::get('/login', function () {
     return view('login');
 })->name('login');
 
+Route::get('/kontak', function () {
+    return view('kontak');
+})->name('kontak');
+
 Route::get('/register', function () {
     return view('register');
 })->name('register');
