@@ -51,4 +51,22 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class);
     }
+
+    /**
+     * Check if the user has the given role name (case-insensitive).
+     */
+    public function isRole(string $name): bool
+    {
+        return strtolower(optional($this->role)->name ?? '') === strtolower($name);
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->isRole('admin');
+    }
+
+    public function isPelanggan(): bool
+    {
+        return $this->isRole('pelanggan');
+    }
 }

@@ -37,19 +37,19 @@
                         @endif
                         @endauth
 
-                        @if (optional(auth()->user()->role)->name != "admin")
-                            <li class="nav-item">
-                            <a class="nav-link active" href="{{ route('home') }}">Beranda</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('menu') }}">Menu Katering</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('keranjang') }}">Keranjang</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('transaksi-saya') }}">Riwayat</a>
-                            </li>
+                        @if(!auth()->check() || auth()->user()->isPelanggan())
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="{{ route('home') }}">Beranda</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('menu') }}">Menu Katering</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('keranjang') }}">Keranjang</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('transaksi-saya') }}">Riwayat</a>
+                                </li>
                         @endif
                         
                         @guest
