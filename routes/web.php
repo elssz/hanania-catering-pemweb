@@ -31,6 +31,13 @@ Route::post('/login', [\App\Http\Controllers\AuthController::class, 'login'])->n
 
 Route::get('/logout', [\App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
 
+use App\Http\Controllers\PasswordResetController;
+
+Route::get('/password/reset', [PasswordResetController::class, 'showLinkRequestForm'])->name('password.request');
+Route::post('/password/email', [PasswordResetController::class, 'sendResetLinkEmail'])->name('password.email');
+Route::get('/password/reset/{token}', [PasswordResetController::class, 'showResetForm'])->name('password.reset');
+Route::post('/password/reset', [PasswordResetController::class, 'reset'])->name('password.update');
+
 Route::get('/layout', function () {
     return view('components/layout');
 });
@@ -43,10 +50,10 @@ Route::get('/menu', function () {
 Route::get('/keranjang', function () {
     $cart = null;
     if (auth()->check()) {
-            $cart = \App\Models\Order::with(['items.menu'])
-                ->where('user_id', auth()->id())
-                ->where('status_order', 'cart')
-                ->first();
+        $cart = \App\Models\Order::with(['items.menu'])
+            ->where('user_id', auth()->id())
+            ->where('status_order', 'cart')
+            ->first();
     }
     return view('user.order.keranjang', compact('cart'));
 })->name('keranjang');
@@ -66,19 +73,21 @@ Route::get('/pesanan', function () {
 
 // Checkout & Confirmation routes
 use App\Http\Controllers\User\CartController;
+
 Route::post('/checkout', [CartController::class, 'checkout'])->name('checkout')->middleware('auth');
 Route::get('/order/{orderId}/confirmation', [CartController::class, 'confirmation'])->name('order.confirmation')->middleware('auth');
 
 // viewtransaksi
 use App\Http\Controllers\User\TransactionController;
+
 Route::get('/transaksi-saya', [TransactionController::class, 'index'])
     ->middleware('auth')->name('transaksi-saya');
 
 //cart.add
 
 Route::post('/cart/add/{menuId}', [CartController::class, 'addToCart'])
-     ->name('cart.add')
-     ->middleware('auth');
+    ->name('cart.add')
+    ->middleware('auth');
 
 
 use App\Http\Controllers\Admin\MenuController;

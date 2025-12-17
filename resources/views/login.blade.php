@@ -43,6 +43,10 @@
                     Belum punya akun?
                     <a href="{{ route('register') }}" class="text-bata fw-semibold">Daftar</a>
                 </p>
+                <p class="text-center mt-3">
+                    Lupa Sandi?
+                    <a href="{{ route('password.request') }}" class="text-bata fw-semibold">Reset password</a>
+                </p>
             </form>
         </div>
     </div>
