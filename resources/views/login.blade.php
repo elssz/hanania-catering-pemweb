@@ -31,7 +31,10 @@
 
                 <div class="mb-3">
                     <label class="form-label">Password</label>
-                    <input name="password" type="password" class="form-control @error('password') is-invalid @enderror" placeholder="Masukkan password">
+                    <div class="input-group">
+                        <input id="password" name="password" type="password" class="form-control @error('password') is-invalid @enderror" placeholder="Masukkan password">
+                        <button type="button" class="btn btn-outline-secondary" id="togglePassword">Tampilkan</button>
+                    </div>
                     @error('password')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
 
@@ -51,6 +54,19 @@
         </div>
     </div>
 
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const toggle = document.getElementById('togglePassword');
+      const password = document.getElementById('password');
+      if (toggle && password) {
+        toggle.addEventListener('click', function () {
+          const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+          password.setAttribute('type', type);
+          toggle.textContent = type === 'password' ? 'Tampilkan' : 'Sembunyikan';
+        });
+      }
+    });
+    </script>
 </body>
 
 </html>
