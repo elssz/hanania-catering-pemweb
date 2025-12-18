@@ -91,7 +91,7 @@
                                 <label for="name" class="form-label fw-semibold">Nama Lengkap</label>
                                 <input type="text" class="form-control @error('name') is-invalid @enderror" 
                                        id="name" name="name" 
-                                       value="{{ old('name', auth()->user()->name ?? '') }}" 
+                                       value="{{ old('name', auth()->user()->nama ?? '') }}" 
                                        required>
                                 @error('name') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
                             </div>

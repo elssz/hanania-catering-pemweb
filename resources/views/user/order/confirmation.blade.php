@@ -151,7 +151,6 @@
                             <span class="fw-bold text-bata fs-5">Total</span>
                             <span class="fw-bold text-bata fs-5">Rp {{ number_format($order->total, 0, ',', '.') }}</span>
                         </div>
-
                         <hr>
 
                         <!-- BUTTON ACTIONS -->
