@@ -18,7 +18,7 @@ class CartController extends Controller
         $qty = (int) $request->input('qty', 1);
         if ($qty < 1) $qty = 1;
 
-        // 1️⃣ Ambil / buat cart
+        // Ambil / buat cart
         $cart = Order::where('user_id', auth()->id())
             ->where('status_order', 'cart')
             ->first();
@@ -31,18 +31,18 @@ class CartController extends Controller
             ]);
         }
 
-        // 2️⃣ Cek item di cart
+        // Cek item di cart
         $item = OrderItem::where('order_id', $cart->id)
             ->where('menu_id', $menu->id)
             ->first();
 
         if ($item) {
-            // 🔁 Update qty
+            // Update qty
             $item->quantity = $item->quantity + $qty;
             $item->subtotal = $item->quantity * $item->price;
             $item->save();
         } else {
-            // ➕ Tambah item baru
+            // Tambah item baru
             OrderItem::create([
                 'order_id' => $cart->id,
                 'menu_id' => $menu->id,
@@ -52,7 +52,7 @@ class CartController extends Controller
             ]);
         }
 
-        // 3️⃣ Update total cart
+        // Update total cart
         $cart->total = OrderItem::where('order_id', $cart->id)
             ->sum(DB::raw('quantity * price'));
 
@@ -89,7 +89,7 @@ class CartController extends Controller
         $user->phone = $validated['phone'];
         $user->save();
 
-        return redirect()->route('user.order.confirmation', $cart->id)->with('success', 'Pesanan berhasil dibuat!');
+        return redirect()->route('order.confirmation', $cart->id)->with('success', 'Pesanan berhasil dibuat!');
     }
 
     // Show order confirmation
@@ -100,5 +100,26 @@ class CartController extends Controller
             ->findOrFail($orderId);
 
         return view('user.order.confirmation', compact('order'));
+    }
+
+    // Remove item from cart
+    public function removeItem(Request $request, $itemId)
+    {
+        $item = OrderItem::findOrFail($itemId);
+        $order = Order::findOrFail($item->order_id);
+
+        // Check if user owns this order
+        if ($order->user_id !== auth()->id()) {
+            return back()->with('error', 'Unauthorized');
+        }
+
+        $item->delete();
+
+        // Recalculate total
+        $order->total = OrderItem::where('order_id', $order->id)
+            ->sum(DB::raw('quantity * price'));
+        $order->save();
+
+        return back()->with('success', 'Item dihapus dari keranjang');
     }
 }

@@ -37,8 +37,12 @@
                             <span class="badge bg-success">
                                 <i class="bi bi-check-circle"></i> Selesai
                             </span>
+                            @elseif($order->status == 'rejected')
+                            <span class="badge bg-success">
+                                <i class="bi bi-check-circle"></i> Ditolak
+                            </span>
                             @else
-                            <span class="badge bg-danger">Ditolak</span>
+                            <span class="badge bg-danger">Unkwon</span>
                             @endif
                         </div>
                     </div>
@@ -77,6 +81,38 @@
                                 </div>
                             </div>
 
+                            <!-- Step: Pembayaran -->
+                            <div class="timeline-item mb-4">
+                                <div class="row">
+                                    <div class="col-auto">
+                                        <div class="timeline-marker
+                @if($order->payment_status == 'paid')
+                    bg-success text-white
+                @elseif($order->payment_status == 'pending')
+                    bg-warning text-white
+                @else
+                    bg-light border border-secondary text-secondary
+                @endif
+                rounded-circle d-flex align-items-center justify-content-center"
+                                            style="width: 40px; height: 40px;">
+                                            <i class="bi bi-credit-card"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col ps-3">
+                                        <h6 class="fw-bold mb-1">Pembayaran</h6>
+
+                                        @if($order->payment_status == 'paid')
+                                        <small class="text-muted">Pembayaran telah dikonfirmasi</small>
+                                        @elseif($order->payment_status == 'pending')
+                                        <small class="text-muted">Menunggu pembayaran dari pelanggan</small>
+                                        @else
+                                        <small class="text-muted">Pembayaran belum dilakukan</small>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+
+
                             <!-- Step 3: Dalam Persiapan -->
                             <div class="timeline-item mb-4">
                                 <div class="row">
@@ -108,6 +144,63 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- UPLOAD BUKTI PEMBAYARAN (Jika status acc) -->
+                    @if($order->status_order === 'acc')
+                    <div class="card border-0 shadow-sm rounded-4 p-4 mb-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="bg-warning bg-opacity-10 rounded-circle p-3 me-3">
+                                <i class="bi bi-upload text-warning" style="font-size: 1.5rem;"></i>
+                            </div>
+                            <div>
+                                <h5 class="fw-bold text-bata mb-0">Unggah Bukti Pembayaran</h5>
+                                <small class="text-muted">Pesanan Anda telah disetujui. Harap unggah bukti pembayaran Anda.</small>
+                            </div>
+                        </div>
+
+                        <!-- FORM UPLOAD -->
+                        <form action="{{ route('orders.uploadProof', $order->id) }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="mb-3">
+                                <label for="payment_method" class="form-label fw-semibold">Metode Pembayaran</label>
+                                <select class="form-select rounded-3" id="payment_method" name="payment_method" required>
+                                    <option value="">-- Pilih Metode --</option>
+                                    <option value="transfer">Transfer Bank</option>
+                                    <option value="ewallet">E-Wallet</option>
+                                    <option value="cod">Bayar di Tempat</option>
+                                </select>
+                                @error('payment_method')
+                                <small class="text-danger d-block mt-1">{{ $message }}</small>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="proof" class="form-label fw-semibold">Bukti Pembayaran</label>
+                                <div class="input-group">
+                                    <input type="file" class="form-control rounded-start-3" id="proof" name="proof" accept="image/*" required>
+                                    <button class="btn btn-outline-secondary rounded-end-3" type="button" id="browse-btn">
+                                        <i class="bi bi-folder-open"></i> Pilih
+                                    </button>
+                                </div>
+                                <small class="text-muted d-block mt-1">Format: JPG, PNG, GIF. Maks 2MB</small>
+                                @error('proof')
+                                <small class="text-danger d-block mt-1">{{ $message }}</small>
+                                @enderror
+                            </div>
+
+                            <!-- PREVIEW -->
+                            <div class="mb-3" id="preview-container" style="display: none;">
+                                <div class="border rounded-3 p-3 text-center">
+                                    <img id="preview-image" src="" alt="Preview" style="max-width: 100%; max-height: 200px; border-radius: 8px;">
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-hanania w-100 rounded-pill fw-semibold">
+                                <i class="bi bi-upload"></i> Unggah Bukti Pembayaran
+                            </button>
+                        </form>
+                    </div>
+                    @endif
 
                     <!-- DATA PENGIRIMAN -->
                     <div class="card border-0 shadow-sm rounded-4 p-4">
@@ -201,4 +294,29 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
     </style>
+
+    <script>
+        // File input change handler untuk preview gambar
+        document.getElementById('proof')?.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            const previewContainer = document.getElementById('preview-container');
+            const previewImage = document.getElementById('preview-image');
+
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    previewImage.src = event.target.result;
+                    previewContainer.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            } else {
+                previewContainer.style.display = 'none';
+            }
+        });
+
+        // Click handler untuk browse button
+        document.getElementById('browse-btn')?.addEventListener('click', function() {
+            document.getElementById('proof').click();
+        });
+    </script>
 </x-layout>

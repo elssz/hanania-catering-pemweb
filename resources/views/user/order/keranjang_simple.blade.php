@@ -6,17 +6,17 @@
 
             <!-- ERROR / SUCCESS MESSAGES -->
             @if (session('success'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong>Berhasil!</strong> {{ session('success') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                </div>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Berhasil!</strong> {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
             @endif
 
             @if (session('error'))
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <strong>Error!</strong> {{ session('error') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                </div>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Error!</strong> {{ session('error') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
             @endif
 
             <div class="row g-4">
@@ -28,54 +28,61 @@
                         </h5>
 
                         @if($cart && $cart->items->count() > 0)
-                            <div class="table-responsive">
-                                <table class="table table-borderless">
-                                    <thead>
-                                        <tr class="border-bottom">
-                                            <th>Menu</th>
-                                            <th class="text-center">Qty</th>
-                                            <th class="text-right">Harga</th>
-                                            <th class="text-right">Subtotal</th>
-                                            <th class="text-center">Aksi</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach($cart->items as $item)
-                                        <tr class="border-bottom align-middle">
-                                            <td>
-                                                <strong>{{ $item->menu->namaMenu }}</strong>
-                                            </td>
-                                            <td class="text-center">
-                                                <span class="badge bg-light text-dark">{{ $item->quantity }}</span>
-                                            </td>
-                                            <td class="text-right">
-                                                Rp {{ number_format($item->price, 0, ',', '.') }}
-                                            </td>
-                                            <td class="text-right fw-bold text-bata">
-                                                Rp {{ number_format($item->subtotal, 0, ',', '.') }}
-                                            </td>
-                                            <td class="text-center">
-                                                <form action="{{ route('cart.item.remove', $item->id) }}" method="POST" style="display: inline;">
-                                                    @csrf
-                                                    @method('POST')
-                                                    <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Hapus item ini?')">
-                                                        <i class="bi bi-trash"></i> Hapus
-                                                    </button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
+                        <div class="table-responsive">
+                            <table class="table table-borderless">
+                                <thead>
+                                    <tr class="border-bottom">
+                                        <th>Menu</th>
+                                        <th class="text-center">Qty</th>
+                                        <th class="text-right">Harga</th>
+                                        <th class="text-right">Subtotal</th>
+                                        <th class="text-center">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($cart->items as $item)
+                                    <tr class="border-bottom align-middle">
+                                        <td>
+                                            <strong>{{ $item->menu->namaMenu }}</strong>
+                                        </td>
+                                        <td class="text-center">
+                                            <span class="badge bg-light text-dark">{{ $item->quantity }}</span>
+                                        </td>
+                                        <td class="text-right">
+                                            Rp {{ number_format($item->price, 0, ',', '.') }}
+                                        </td>
+                                        <td class="text-right fw-bold text-bata">
+                                            Rp {{ number_format($item->subtotal, 0, ',', '.') }}
+                                        </td>
+                                        <td class="text-center">
+                                            <form action="{{ route('cart.item.remove', $item->id) }}" method="POST" style="display: inline;">
+                                                @csrf
+                                                @method('POST')
+                                                <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Hapus item ini?')">
+                                                    <i class="bi bi-trash"></i> Hapus
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                         @else
-                            <div class="alert alert-info text-center py-4">
-                                <i class="bi bi-cart-x fs-4 d-block mb-2"></i>
-                                <p class="mb-0">Keranjang belanja Anda kosong. <a href="{{ route('menu') }}" class="fw-bold">Lanjutkan belanja</a></p>
-                            </div>
+                        <div class="alert alert-info text-center py-4">
+                            <i class="bi bi-cart-x fs-4 d-block mb-2"></i>
+                            <p class="mb-0">Keranjang belanja Anda kosong. <a href="{{ route('menu') }}" class="fw-bold">Lanjutkan belanja</a></p>
+                        </div>
                         @endif
                     </div>
+                    <!-- Tambah Menu Button -->
+                    <a href="{{ route('menu') }}"
+                        class="btn btn-outline-secondary w-100 mt-2 rounded-pill">
+                        <i class="bi bi-plus-circle"></i> Tambah Menu Lain
+                    </a>
+
                 </div>
+
 
                 <!-- ======== RINGKASAN & TOMBOL CHECKOUT (4/12) ======== -->
                 <div class="col-lg-4">

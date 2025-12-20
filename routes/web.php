@@ -48,7 +48,7 @@ Route::get('/layout', function () {
 
 Route::get('/menu', function () {
     $menus = \App\Models\Menu::orderBy('kategori')->orderBy('namaMenu')->get();
-    return view('menu', compact('menus'));
+    return view('menu_simple', compact('menus'));
 })->name('menu');
 
 Route::get('/keranjang', function () {
@@ -59,7 +59,7 @@ Route::get('/keranjang', function () {
             ->where('status_order', 'cart')
             ->first();
     }
-    return view('user.order.keranjang', compact('cart'));
+    return view('user.order.keranjang_simple', compact('cart'));
 })->name('keranjang');
 
 
@@ -71,7 +71,7 @@ Route::get('/pesanan', function () {
             ->where('status_order', 'cart')
             ->first();
     }
-    return view('user.order.pesanan', compact('cart'));
+    return view('user.order.pesanan_simple', compact('cart'));
 })->name('pesanan')->middleware('auth');
 
 
@@ -87,10 +87,21 @@ use App\Http\Controllers\User\TransactionController;
 Route::get('/transaksi-saya', [TransactionController::class, 'index'])
     ->middleware('auth')->name('transaksi-saya');
 
+// Order detail & upload proof (user)
+Route::get('/orders/{order}', [TransactionController::class, 'showOrder'])
+    ->middleware('auth')->name('orders.show');
+
+Route::post('/orders/{order}/upload-proof', [TransactionController::class, 'uploadProof'])
+    ->middleware('auth')->name('orders.uploadProof');
+
 //cart.add
 
 Route::post('/cart/add/{menuId}', [CartController::class, 'addToCart'])
     ->name('cart.add')
+    ->middleware('auth');
+
+Route::post('/cart/item/{itemId}/remove', [CartController::class, 'removeItem'])
+    ->name('cart.item.remove')
     ->middleware('auth');
 
 
