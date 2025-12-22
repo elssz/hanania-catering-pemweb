@@ -94,8 +94,8 @@ Route::get('/orders/{order}', [TransactionController::class, 'showOrder'])
 Route::post('/orders/{order}/upload-proof', [TransactionController::class, 'uploadProof'])
     ->middleware('auth')->name('orders.uploadProof');
 
-//cart.add
 
+//cart.add
 Route::post('/cart/add/{menuId}', [CartController::class, 'addToCart'])
     ->name('cart.add')
     ->middleware('auth');

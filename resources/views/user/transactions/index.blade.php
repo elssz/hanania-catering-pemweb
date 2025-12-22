@@ -50,27 +50,36 @@
                     <div class="col-md-2 text-center">
                         <small class="text-muted d-block mb-1">Status Order</small>
                         <span class="badge
-                            @if($order->status_order === 'acc')
+                            @if($order->status_order === 'acc' or $order->status_order === 'completed')
                                 bg-success
                             @elseif($order->status_order === 'processing')
                                 bg-primary
                             @elseif($order->status_order === 'pending')
                                 bg-warning text-dark
-                            @elseif($order->status_order === 'canceled')
+                            @elseif($order->status_order === 'canceled' or $order->status_order === 'reject')
                                 bg-danger
                             @else
                                 bg-secondary
                             @endif
                             px-3">
-                            {{ strtoupper($order->status_order ?? 'PENDING') }}
+                            {{ strtoupper($order->status_order ?? '--') }}
                     </div>
 
                     {{-- Status Bayar --}}
                     <div class="col-md-2 text-center">
                         <small class="text-muted d-block mb-1">Status Bayar</small>
-                        <span class="badge {{ $trxStatus === 'verified' ? 'bg-success' : 'bg-warning text-dark' }} px-3">
-                            {{ strtoupper($trxStatus ?? 'PENDING') }}
-                        </span>
+                        <span class="badge
+                            @if($trxStatus === 'verified')
+                                bg-success
+                            @elseif($trxStatus === 'rejected')
+                                bg-danger
+                            @elseif($trxStatus === 'pending')
+                                bg-warning text-dark
+                            @else
+                                bg-secondary
+                            @endif
+                            px-3">
+                            {{ strtoupper($trxStatus ?? '-') }}
                     </div>
 
                     {{-- TOTAL --}}

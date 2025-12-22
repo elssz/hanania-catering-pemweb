@@ -21,24 +21,28 @@
                                 <p class="text-muted small mb-1">Nomor Pesanan</p>
                                 <h5 class="fw-bold text-bata">#ORD-{{ str_pad($order->id, 5, '0', STR_PAD_LEFT) }}</h5>
                             </div>
-                            @if($order->status == 'pending')
+                            @if($order->status_order == 'pending')
                             <span class="badge bg-warning text-dark">
                                 <i class="bi bi-clock"></i> Menunggu Konfirmasi
                             </span>
-                            @elseif($order->status == 'approved')
+                            @elseif($order->status_order == 'acc')
                             <span class="badge bg-info">
                                 <i class="bi bi-credit-card"></i> Menunggu Pembayaran
                             </span>
-                            @elseif($order->status == 'process')
+                            @elseif($order->status_order == 'reject')
                             <span class="badge bg-primary">
-                                <i class="bi bi-hourglass-split"></i> Diproses
+                                <i class="bi bi-hourglass-split"></i> Pesanan Ditolak
                             </span>
-                            @elseif($order->status == 'done')
+                            @elseif($order->status_order == 'complited')
                             <span class="badge bg-success">
-                                <i class="bi bi-check-circle"></i> Selesai
+                                <i class="bi bi-check-circle">Pesanan Selesai</i> Selesai
+                            </span>
+                            @elseif($order->status_order == 'cancelled')
+                            <span class="badge bg-success">
+                                <i class="bi bi-check-circle">Pesanan Dibatalkan</i> Selesai
                             </span>
                             @else
-                            <span class="badge bg-danger">Ditolak</span>
+                            <span class="badge bg-danger">-</span>
                             @endif
                         </div>
                     </div>
@@ -148,8 +152,6 @@
                             </div>
                             @endforeach
                         </div>
-
-                        <hr>
 
                         <!-- TOTAL -->
                         <div class="d-flex justify-content-between mb-3">

@@ -27,6 +27,7 @@ class CartController extends Controller
             $cart = Order::create([
                 'user_id' => auth()->id(),
                 'status_order' => 'cart',
+                'status_payment' => '-',
                 'total' => 0
             ]);
         }

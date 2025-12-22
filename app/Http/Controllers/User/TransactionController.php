@@ -47,8 +47,9 @@ class TransactionController extends Controller
             return back()->with('error', 'Unggah bukti hanya diperbolehkan ketika pesanan telah disetujui oleh admin.');
         }
 
-        if (Transaction::where('order_id', $orderId)->whereNotNull('proof')->exists()) {
+        if (Transaction::where('order_id', $orderId)->wherenotNull('proof')->exists()) {
             //aku gatau ini erronya muncul dimana
+            return back()->with('error','Anda telah upload bukti bayar!');
         } else {
             // create transaction
             $transaction = Transaction::create([
@@ -56,29 +57,34 @@ class TransactionController extends Controller
                 'user_id' => auth()->id(),
                 'amount' => $order->total,
                 'payment_method' => $request->input('payment_method', 'transfer'),
-                'status' => 'pending'
+                'status' => '-'
             ]);
         }
-        $request->validate([
-            'proof' => 'required|image|max:2048'
-        ]);
 
-        $file = $request->file('proof');
-        $ext = $file->getClientOriginalExtension();
-        $filename = 'order_' . str_pad($order->id, 5, '0', STR_PAD_LEFT) . '_' . time() . '.' . $ext;
-        $path = public_path('images/bukti_bayar');
-        if (!file_exists($path)) {
-            mkdir($path, 0755, true);
+        if($request->hasFile('proof')){
+            $request->validate([
+            'proof' => 'required|image|max:2048']);
+
+            $file = $request->file('proof');
+            $ext = $file->getClientOriginalExtension();
+            $filename = 'order_' . str_pad($order->id, 5, '0', STR_PAD_LEFT) . '_' . time() . '.' . $ext;
+            $path = public_path('images/bukti_bayar');
+            if (!file_exists($path)) {
+                mkdir($path, 0755, true);
+            }
+            $file->move($path, $filename);
+            
+            //upload img gambar
+            $transaction->proof = 'images/bukti_bayar/' . $filename;
+            $transaction->status = 'pending';
+            $transaction->save();
+    
+            // update order payment status
+            $order->status_payment = 'pending';
+            $order->save();
         }
-        $file->move($path, $filename);
 
-        //upload img gambar
-        $transaction->proof = 'images/bukti_bayar/' . $filename;
-        $transaction->save();
 
-        // update order payment status
-        $order->status_payment = 'pending';
-        $order->save();
 
         return redirect()->route('transaksi-saya')->with('success', 'Bukti pembayaran berhasil diunggah. Menunggu verifikasi.');
     }

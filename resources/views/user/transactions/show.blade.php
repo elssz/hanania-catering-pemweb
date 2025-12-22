@@ -7,8 +7,34 @@
                 <div class="mb-3">
                     <i class="bi bi-check-circle-fill text-success" style="font-size: 3rem;"></i>
                 </div>
+                @if ($order->status_order === 'pending'&& $order->status_payment === '-')
                 <h2 class="fw-bold text-bata mb-2">Pesanan Berhasil Dibuat!</h2>
                 <p class="text-muted">Pesanan Anda sedang menunggu konfirmasi dari Hanania</p>
+                @elseif ($order->status_order === 'acc' && $order->status_payment === '-')
+                <h2 class="fw-bold text-bata mb-2">Pesanan Telah Disetujui Admin!</h2>
+                <p class="text-muted">Pesanan Anda telah disetujui, Silahkan melakukan Pembayaran!</p>
+                @elseif ($order->status_order === 'acc' && $order->status_payment === 'pending')
+                <h2 class="fw-bold text-bata mb-2">Bukti Bayar Telah Terkirim!</h2>
+                <p class="text-muted">Admin cek duluu, yaw!</p>
+                @elseif ($order->status_order === 'acc' && $order->status_payment === 'awaiting_payment')
+                <h2 class="fw-bold text-bata mb-2">Bukti Bayar ditolak!</h2>
+                <p class="text-muted">Mohon maaf, bukti bayar tidak sesuai! Kirim Ulang Bukti Bayar</p>
+                @elseif ($order->status_order === 'acc' && $order->status_payment === 'paid')
+                <h2 class="fw-bold text-bata mb-2">Bukti Bayar Telah diterima!</h2>
+                <p class="text-muted">Pesanan Sedang diproses!</p>
+                @elseif ($order->status_order === 'rejected' && $order->status_payment === '-')
+                <h2 class="fw-bold text-bata mb-2">Pesanan Ditolak Admin!</h2>
+                <p class="text-muted">Mohon maaf, pesanan Anda ditolak oleh admin.</p>
+                @elseif ($order->status_order === 'completed'&& $order->status_payment === 'paid')
+                <h2 class="fw-bold text-bata mb-2">Pesanan Sudah Dikirim!</h2>
+                <p class="text-muted">Pesanan Sudah Siap!</p>
+                @elseif ($order->status_order === 'cancelled')
+                <h2 class="fw-bold text-bata mb-2">Pesanan telah dibatalkan!</h2>
+                <p class="text-muted">Pesanan Anda telah dibatalkan oleh admin.</p>
+                @else
+                <p class="badge bg-secondary">Unknown</p>
+                @endif
+                
             </div>
 
             <div class="row g-4">
@@ -21,25 +47,29 @@
                                 <p class="text-muted small mb-1">Nomor Pesanan</p>
                                 <h5 class="fw-bold text-bata">#ORD-{{ str_pad($order->id, 5, '0', STR_PAD_LEFT) }}</h5>
                             </div>
-                            @if($order->status == 'pending')
+                            @if($order->status_order == 'pending')
                             <span class="badge bg-warning text-dark">
                                 <i class="bi bi-clock"></i> Menunggu Konfirmasi
                             </span>
-                            @elseif($order->status == 'approved')
-                            <span class="badge bg-info">
-                                <i class="bi bi-credit-card"></i> Menunggu Pembayaran
+                            @elseif($order->status_order == 'acc' && $order->status_payment == 'pending')
+                            <span class="badge bg-warning text-dark">
+                                <i class="bi bi-credit-card"></i> Menunggu Konfirmasi Pembayaran
                             </span>
-                            @elseif($order->status == 'process')
+                            @elseif($order->status_order == 'acc' && $order->status_payment == 'paid')
                             <span class="badge bg-primary">
                                 <i class="bi bi-hourglass-split"></i> Diproses
                             </span>
-                            @elseif($order->status == 'done')
+                            @elseif($order->status_order == 'completed')
                             <span class="badge bg-success">
                                 <i class="bi bi-check-circle"></i> Selesai
                             </span>
                             @elseif($order->status == 'rejected')
                             <span class="badge bg-success">
                                 <i class="bi bi-check-circle"></i> Ditolak
+                            </span>
+                            @elseif($order->status_order == 'cancelled')
+                            <span class="badge bg-success">
+                                <i class="bi bi-check-circle"></i> Dibatalkan
                             </span>
                             @else
                             <span class="badge bg-danger">Unkwon</span>
@@ -146,7 +176,7 @@
                     </div>
 
                     <!-- UPLOAD BUKTI PEMBAYARAN (Jika status acc) -->
-                    @if($order->status_order === 'acc')
+                    @if($order->status_order === 'acc' && $order->status_payment === '-')
                     <div class="card border-0 shadow-sm rounded-4 p-4 mb-4">
                         <div class="d-flex align-items-center mb-3">
                             <div class="bg-warning bg-opacity-10 rounded-circle p-3 me-3">
@@ -200,6 +230,8 @@
                             </button>
                         </form>
                     </div>
+                    @else
+                    <!-- Jika bukan status acc, tidak perlu tampilkan upload -->    
                     @endif
 
                     <!-- DATA PENGIRIMAN -->
@@ -241,8 +273,6 @@
                             </div>
                             @endforeach
                         </div>
-
-                        <hr>
 
                         <!-- TOTAL -->
                         <div class="d-flex justify-content-between mb-3">
