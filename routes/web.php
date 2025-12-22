@@ -47,7 +47,7 @@ Route::get('/layout', function () {
 });
 
 Route::get('/menu', function () {
-    $menus = \App\Models\Menu::orderBy('kategori')->orderBy('namaMenu')->get();
+    $menus = \App\Models\Menu::orderBy('namaMenu')->get();
     return view('menu_simple', compact('menus'));
 })->name('menu');
 

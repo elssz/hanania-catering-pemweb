@@ -86,14 +86,14 @@
                                 <div class="row">
                                     <div class="col-auto">
                                         <div class="timeline-marker
-                @if($order->payment_status == 'paid')
-                    bg-success text-white
-                @elseif($order->payment_status == 'pending')
-                    bg-warning text-white
-                @else
-                    bg-light border border-secondary text-secondary
-                @endif
-                rounded-circle d-flex align-items-center justify-content-center"
+                                            @if($order->payment_status == 'paid')
+                                                bg-success text-white
+                                            @elseif($order->payment_status == 'pending')
+                                                bg-warning text-white
+                                            @else
+                                                bg-light border border-secondary text-secondary
+                                            @endif
+                                            rounded-circle d-flex align-items-center justify-content-center"
                                             style="width: 40px; height: 40px;">
                                             <i class="bi bi-credit-card"></i>
                                         </div>
@@ -164,10 +164,10 @@
                             <div class="mb-3">
                                 <label for="payment_method" class="form-label fw-semibold">Metode Pembayaran</label>
                                 <select class="form-select rounded-3" id="payment_method" name="payment_method" required>
-                                    <option value="">-- Pilih Metode --</option>
-                                    <option value="transfer">Transfer Bank</option>
-                                    <option value="ewallet">E-Wallet</option>
-                                    <option value="cod">Bayar di Tempat</option>
+                                    <option value="">-- Pilih Metode Transfer --</option>
+                                    <option value="BCA">BCA</option>
+                                    <option value="MANDIRI">MANDIRI</option>
+                                    <option value="BRI">BRI</option>
                                 </select>
                                 @error('payment_method')
                                 <small class="text-danger d-block mt-1">{{ $message }}</small>

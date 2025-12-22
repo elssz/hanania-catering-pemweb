@@ -39,15 +39,26 @@ class TransactionController extends Controller
     // Handle upload of payment proof
     public function uploadProof(Request $request, $orderId)
     {
-        $order = Order::with('transaction')
-            ->where('user_id', auth()->id())
+        $order = Order::where('user_id', auth()->id())
             ->findOrFail($orderId);
 
         // only allow upload if admin already accepted the order
-        if ($order->status_order !== 'accept') {
+        if ($order->status_order !== 'acc') {
             return back()->with('error', 'Unggah bukti hanya diperbolehkan ketika pesanan telah disetujui oleh admin.');
         }
 
+        if (Transaction::where('order_id', $orderId)->whereNotNull('proof')->exists()) {
+            //aku gatau ini erronya muncul dimana
+        } else {
+            // create transaction
+            $transaction = Transaction::create([
+                'order_id' => $order->id,
+                'user_id' => auth()->id(),
+                'amount' => $order->total,
+                'payment_method' => $request->input('payment_method', 'transfer'),
+                'status' => 'pending'
+            ]);
+        }
         $request->validate([
             'proof' => 'required|image|max:2048'
         ]);
@@ -61,15 +72,9 @@ class TransactionController extends Controller
         }
         $file->move($path, $filename);
 
-        // create transaction
-        $transaction = Transaction::create([
-            'order_id' => $order->id,
-            'user_id' => auth()->id(),
-            'amount' => $order->total,
-            'payment_method' => $request->input('payment_method', 'transfer'),
-            'status' => 'pending',
-            'proof' => 'images/bukti_bayar/' . $filename,
-        ]);
+        //upload img gambar
+        $transaction->proof = 'images/bukti_bayar/' . $filename;
+        $transaction->save();
 
         // update order payment status
         $order->status_payment = 'pending';
