@@ -34,7 +34,7 @@
                 @else
                 <p class="badge bg-secondary">Unknown</p>
                 @endif
-                
+
             </div>
 
             <div class="row g-4">
@@ -231,7 +231,7 @@
                         </form>
                     </div>
                     @else
-                    <!-- Jika bukan status acc, tidak perlu tampilkan upload -->    
+                    <!-- Jika bukan status acc, tidak perlu tampilkan upload -->
                     @endif
 
                     <!-- DATA PENGIRIMAN -->
