@@ -103,6 +103,34 @@ class CartController extends Controller
         return view('user.order.confirmation', compact('order'));
     }
 
+    //update order
+    public function updateItem(Request $request, $itemId)
+    {
+        $item = OrderItem::findOrFail($itemId);
+        $order = Order::findOrFail($item->order_id);
+
+        // Check if user owns this order
+        if ($order->user_id !== auth()->id()) {
+            return back()->with('error', 'Unauthorized');
+        }
+
+        $qty = (int) $request->input('qty', 1);
+        if ($qty < 1) {
+            return back()->with('error', 'Quantity must be at least 1');
+        }
+
+        $item->quantity = $qty;
+        $item->subtotal = $item->quantity * $item->price;
+        $item->save();
+
+        // Recalculate total
+        $order->total = OrderItem::where('order_id', $order->id)
+            ->sum(DB::raw('quantity * price'));
+        $order->save();
+
+        return back()->with('success', 'Item keranjang diperbarui');
+    }
+
     // Remove item from cart
     public function removeItem(Request $request, $itemId)
     {

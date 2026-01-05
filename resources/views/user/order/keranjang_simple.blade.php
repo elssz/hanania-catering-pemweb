@@ -42,24 +42,46 @@
                                 <tbody>
                                     @foreach($cart->items as $item)
                                     <tr class="border-bottom align-middle">
+                                    <tr class="border-bottom align-middle">
                                         <td>
                                             <strong>{{ $item->menu->namaMenu }}</strong>
                                         </td>
+
+                                        <!-- UPDATE QTY -->
                                         <td class="text-center">
-                                            <span class="badge bg-light text-dark">{{ $item->quantity }}</span>
+                                            <form action="{{ route('cart.item.update', $item->id) }}" method="POST"
+                                                class="d-flex justify-content-center gap-2">
+                                                @csrf
+                                                @method('POST')
+
+                                                <input type="number"
+                                                    name="qty"
+                                                    value="{{ $item->quantity }}"
+                                                    min="1"
+                                                    class="form-control form-control-sm text-center"
+                                                    style="width: 60px;">
+
+                                                <button type="submit" class="btn btn-sm btn-outline-primary">
+                                                    <i class="bi bi-arrow-repeat">Update</i>
+                                                </button>
+                                            </form>
                                         </td>
+
                                         <td class="text-right">
                                             Rp {{ number_format($item->price, 0, ',', '.') }}
                                         </td>
+
                                         <td class="text-right fw-bold text-bata">
                                             Rp {{ number_format($item->subtotal, 0, ',', '.') }}
                                         </td>
+
+                                        <!-- HAPUS -->
                                         <td class="text-center">
-                                            <form action="{{ route('cart.item.remove', $item->id) }}" method="POST" style="display: inline;">
+                                            <form action="{{ route('cart.item.remove', $item->id) }}" method="POST" style="display:inline;">
                                                 @csrf
-                                                @method('POST')
-                                                <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Hapus item ini?')">
-                                                    <i class="bi bi-trash"></i> Hapus
+                                                <button type="submit" class="btn btn-sm btn-outline-danger"
+                                                    onclick="return confirm('Hapus item ini?')">
+                                                    <i class="bi bi-trash">Hapus</i>
                                                 </button>
                                             </form>
                                         </td>
@@ -94,7 +116,7 @@
                         <div class="mb-3 p-3 bg-light rounded-3" style="max-height: 250px; overflow-y: auto;">
                             @foreach($cart->items as $item)
                             <div class="d-flex justify-content-between mb-2">
-                                <small>{{ $item->menu->namaMenu }} x{{ $item->quantity }}</small>
+                                <small>{{ $item->menu->namaMenu }} x {{ $item->quantity }}</small>
                                 <small class="fw-bold">Rp {{ number_format($item->subtotal, 0, ',', '.') }}</small>
                             </div>
                             @endforeach

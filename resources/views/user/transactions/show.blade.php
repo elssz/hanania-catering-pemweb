@@ -80,100 +80,154 @@
                     <!-- TIMELINE STATUS -->
                     <div class="card border-0 shadow-sm rounded-4 p-4 mb-4">
                         <h5 class="fw-bold text-bata mb-4">Status Pesanan</h5>
+
                         <div class="timeline">
-                            <!-- Step 1: Pesanan Dibuat -->
+
+                            {{-- 1. Pesanan Dibuat --}}
                             <div class="timeline-item mb-4">
                                 <div class="row">
                                     <div class="col-auto">
-                                        <div class="timeline-marker bg-success text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                        <div class="timeline-marker
+                        {{ in_array($order->status, ['pending','accepted','completed','shipped']) 
+                            ? 'bg-success text-white' 
+                            : 'bg-light border text-secondary' }}
+                        rounded-circle d-flex align-items-center justify-content-center"
+                                            style="width:40px;height:40px;">
                                             <i class="bi bi-check"></i>
                                         </div>
                                     </div>
                                     <div class="col ps-3">
                                         <h6 class="fw-bold mb-1">Pesanan Dibuat</h6>
-                                        <small class="text-muted">{{ $order->created_at->locale('id')->format('d F Y H:i') }}</small>
+                                        <small class="text-muted">
+                                            {{ $order->created_at->locale('id')->format('d F Y H:i') }}
+                                        </small>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Step 2: Menunggu Konfirmasi -->
+                            {{-- 2. Menunggu Konfirmasi --}}
                             <div class="timeline-item mb-4">
                                 <div class="row">
                                     <div class="col-auto">
-                                        <div class="timeline-marker bg-warning text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                        <div class="timeline-marker
+                        @if($order->status == 'pending')
+                            bg-warning text-white
+                        @elseif(in_array($order->status, ['accepted','completed','shipped']))
+                            bg-success text-white
+                        @else
+                            bg-light border text-secondary
+                        @endif
+                        rounded-circle d-flex align-items-center justify-content-center"
+                                            style="width:40px;height:40px;">
                                             <i class="bi bi-clock"></i>
                                         </div>
                                     </div>
                                     <div class="col ps-3">
                                         <h6 class="fw-bold mb-1">Menunggu Konfirmasi</h6>
-                                        <small class="text-muted">Admin Hanania sedang memverifikasi pesanan Anda</small>
+                                        <small class="text-muted">
+                                            @if($order->status == 'pending')
+                                            Admin sedang memverifikasi pesanan Anda
+                                            @else
+                                            Pesanan telah dikonfirmasi
+                                            @endif
+                                        </small>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Step: Pembayaran -->
+                            {{-- 3. Pembayaran --}}
                             <div class="timeline-item mb-4">
                                 <div class="row">
                                     <div class="col-auto">
                                         <div class="timeline-marker
-                                            @if($order->payment_status == 'paid')
-                                                bg-success text-white
-                                            @elseif($order->payment_status == 'pending')
-                                                bg-warning text-white
-                                            @else
-                                                bg-light border border-secondary text-secondary
-                                            @endif
-                                            rounded-circle d-flex align-items-center justify-content-center"
-                                            style="width: 40px; height: 40px;">
+                        @if($order->payment_status == 'verified')
+                            bg-success text-white
+                        @elseif($order->payment_status == 'pending')
+                            bg-warning text-white
+                        @else
+                            bg-light border text-secondary
+                        @endif
+                        rounded-circle d-flex align-items-center justify-content-center"
+                                            style="width:40px;height:40px;">
                                             <i class="bi bi-credit-card"></i>
                                         </div>
                                     </div>
                                     <div class="col ps-3">
                                         <h6 class="fw-bold mb-1">Pembayaran</h6>
-
-                                        @if($order->payment_status == 'paid')
-                                        <small class="text-muted">Pembayaran telah dikonfirmasi</small>
-                                        @elseif($order->payment_status == 'pending')
-                                        <small class="text-muted">Menunggu pembayaran dari pelanggan</small>
-                                        @else
-                                        <small class="text-muted">Pembayaran belum dilakukan</small>
-                                        @endif
+                                        <small class="text-muted">
+                                            @if($order->payment_status == 'paid')
+                                            Pembayaran telah dikonfirmasi
+                                            @elseif($order->payment_status == 'pending')
+                                            Menunggu pembayaran dari pelanggan
+                                            @else
+                                            Pembayaran belum dilakukan
+                                            @endif
+                                        </small>
                                     </div>
                                 </div>
                             </div>
 
-
-                            <!-- Step 3: Dalam Persiapan -->
+                            {{-- 4. Dalam Persiapan --}}
                             <div class="timeline-item mb-4">
                                 <div class="row">
                                     <div class="col-auto">
-                                        <div class="timeline-marker bg-light border-2 border-secondary text-secondary rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                        <div class="timeline-marker
+                        @if($order->status == 'accepted')
+                            bg-warning text-white
+                        @elseif(in_array($order->status, ['completed','shipped']))
+                            bg-success text-white
+                        @else
+                            bg-light border text-secondary
+                        @endif
+                        rounded-circle d-flex align-items-center justify-content-center"
+                                            style="width:40px;height:40px;">
                                             <i class="bi bi-hourglass-split"></i>
                                         </div>
                                     </div>
                                     <div class="col ps-3">
                                         <h6 class="fw-bold mb-1">Dalam Persiapan</h6>
-                                        <small class="text-muted">Pesanan sedang disiapkan di dapur</small>
+                                        <small class="text-muted">
+                                            @if($order->status == 'accepted')
+                                            Pesanan sedang disiapkan
+                                            @elseif(in_array($order->status, ['completed','shipped']))
+                                            Pesanan telah disiapkan
+                                            @else
+                                            Menunggu konfirmasi pesanan
+                                            @endif
+                                        </small>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Step 4: Siap Dikirim -->
+                            {{-- 5. Siap Dikirim --}}
                             <div class="timeline-item">
                                 <div class="row">
                                     <div class="col-auto">
-                                        <div class="timeline-marker bg-light border-2 border-secondary text-secondary rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                        <div class="timeline-marker
+                        {{ $order->status == 'shipped' 
+                            ? 'bg-success text-white' 
+                            : 'bg-light border text-secondary' }}
+                        rounded-circle d-flex align-items-center justify-content-center"
+                                            style="width:40px;height:40px;">
                                             <i class="bi bi-truck"></i>
                                         </div>
                                     </div>
                                     <div class="col ps-3">
                                         <h6 class="fw-bold mb-1">Siap Dikirim</h6>
-                                        <small class="text-muted">Pesanan siap dikirim ke alamat Anda</small>
+                                        <small class="text-muted">
+                                            @if($order->status == 'shipped')
+                                            Pesanan sedang dalam perjalanan
+                                            @else
+                                            Menunggu pesanan selesai disiapkan
+                                            @endif
+                                        </small>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
+
 
                     <!-- UPLOAD BUKTI PEMBAYARAN (Jika status acc) -->
                     @if($order->status_order === 'acc' && $order->status_payment === '-')
