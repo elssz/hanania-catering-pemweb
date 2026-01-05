@@ -104,6 +104,10 @@ Route::post('/cart/item/{itemId}/remove', [CartController::class, 'removeItem'])
     ->name('cart.item.remove')
     ->middleware('auth');
 
+Route::post('/cart/item/{itemId}/update', [CartController::class, 'updateItem'])
+    ->name('cart.item.update')
+    ->middleware('auth');
+
 
 use App\Http\Controllers\Admin\MenuController;
 
