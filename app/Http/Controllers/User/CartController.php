@@ -28,7 +28,11 @@ class CartController extends Controller
                 'user_id' => auth()->id(),
                 'status_order' => 'cart',
                 'status_payment' => '-',
-                'total' => 0
+                'total' => 0,
+                'nama' => auth()->user()->name,
+                'noHp' => auth()->user()->phone,
+                'tglpesan' => null,
+                'alamat' => null
             ]);
         }
 
@@ -80,6 +84,12 @@ class CartController extends Controller
         if (!$cart || $cart->items->isEmpty()) {
             return back()->with('error', 'Keranjang Anda kosong.');
         }
+
+        // Update order details
+        $cart->nama = $validated['name'];
+        $cart->noHp = $validated['phone'];
+        $cart->alamat = $validated['address'];
+        $cart->tglpesan = $validated['date'];   
 
         // Update order with user info and change status to pending
         $cart->status_order = 'pending';
