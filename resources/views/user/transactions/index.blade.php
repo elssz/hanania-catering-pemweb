@@ -53,8 +53,8 @@
                             <span
                                 class="badge
                             @if ($order->status_order === 'completed') bg-success
-                            @elseif($order->status_order === 'processing')
-                                bg-primary
+                            @elseif($order->status_order === 'acc')
+                                bg-success
                             @elseif($order->status_order === 'pending')
                                 bg-warning text-dark
                             @elseif($order->status_order === 'canceled' or $order->status_order === 'reject')

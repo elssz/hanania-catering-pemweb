@@ -45,6 +45,10 @@ class ReviewController extends Controller
             'proof' => $photoPath
         ]);
 
+        // //menngubah order menjadi done
+        // $order->status_order = 'done';
+        // $order->save();
+
         return back()->with('success', 'Terima kasih atas ulasan Anda!');
     }
 

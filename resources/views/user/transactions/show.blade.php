@@ -51,6 +51,10 @@
                             <span class="badge bg-warning text-dark">
                                 <i class="bi bi-clock"></i> Menunggu Konfirmasi
                             </span>
+                            @elseif($order->status_order == 'acc' && $order->status_payment == '-')
+                                <span class="badge bg-warning text-dark">
+                                    <i class="bi bi-credit-card"></i> Segera melakukan Pembayaran
+                                </span>
                             @elseif($order->status_order == 'acc' && $order->status_payment == 'pending')
                                 <span class="badge bg-warning text-dark">
                                     <i class="bi bi-credit-card"></i> Menunggu Konfirmasi Pembayaran
@@ -59,12 +63,16 @@
                                 <span class="badge bg-primary">
                                     <i class="bi bi-hourglass-split"></i> Diproses
                                 </span>
+                            @elseif($order->status_order == 'acc' && $order->status_payment == 'awaiting_payment')
+                                <span class="badge bg-warning text-dark">
+                                    <i class="bi bi-hourglass-split"></i> Segera lakukan pembayaran ulang
+                                </span>
                             @elseif($order->status_order == 'completed')
                             <span class="badge bg-success">
                                 <i class="bi bi-check-circle"></i> Selesai
                             </span>
-                            @elseif($order->status_order == 'rejected')
-                            <span class="badge bg-success">
+                            @elseif($order->status_order == 'reject')
+                            <span class="badge bg-danger">
                                 <i class="bi bi-check-circle"></i> Ditolak
                             </span>
                             @elseif($order->status_order == 'cancelled')
@@ -88,7 +96,7 @@
                                 <div class="row">
                                     <div class="col-auto">
                                         <div class="timeline-marker
-                        {{ in_array($order->status_order, ['pending','acc','completed','cancelled'])
+                        {{ in_array($order->status_order, ['pending','acc','completed','cancelled', 'reject'])
                             ? 'bg-success text-white'
                             : 'bg-light border text-secondary' }}
                         rounded-circle d-flex align-items-center justify-content-center"
@@ -114,10 +122,11 @@
                             bg-warning text-white
                         @elseif(in_array($order->status_order, ['acc','completed','cancelled']))
                             bg-success text-white
-                        @elseif($order->status_order == 'rejected')
+                        @elseif($order->status_order == 'reject')
                             bg-danger text-white
                         @else
-                            bg-light border text-secondary @endif
+                            bg-light border text-secondary
+                        @endif
                         rounded-circle d-flex align-items-center justify-content-center"
                                             style="width:40px;height:40px;">
                                             <i class="bi bi-clock"></i>
@@ -141,14 +150,15 @@
                                 <div class="row">
                                     <div class="col-auto">
                                         <div class="timeline-marker
-                        @if($order->status_payment == 'verified')
+                        @if($order->status_payment == 'paid')
                             bg-success text-white
-                        @elseif($order->status_payment == 'pending')
+                        @elseif($order->status_payment == 'pending' || $order->status_order == 'acc')
                             bg-warning text-white
                         @elseif($order->status_payment == 'awaiting_payment')
                             bg-danger text-white
                         @else
-                            bg-light border text-secondary @endif
+                            bg-light border text-secondary 
+                        @endif
                         rounded-circle d-flex align-items-center justify-content-center"
                                             style="width:40px;height:40px;">
                                             <i class="bi bi-credit-card"></i>
@@ -160,7 +170,11 @@
                                             @if($order->status_payment == 'paid')
                                             Pembayaran telah dikonfirmasi
                                             @elseif($order->status_payment == 'pending')
-                                            Menunggu pembayaran dari pelanggan
+                                            Menunggu konfirmasi pembayaran dari admin
+                                            @elseif($order->status_payment == '-')
+                                            Segera lakukan pembayaran
+                                            @elseif($order->status_payment == 'awaiting_payment')
+                                            Segera lakukan pembayaran ulang
                                             @else
                                                 Pembayaran belum dilakukan
                                             @endif
@@ -180,9 +194,9 @@
                                 <div class="row">
                                     <div class="col-auto">
                                         <div class="timeline-marker
-                        @if($order->status_order == 'accepted')
+                        @if($order->status_order == 'acc' && $order->status_payment == 'paid')
                             bg-warning text-white
-                        @elseif(in_array($order->status_order, ['completed','cancelled']))
+                        @elseif(in_array($order->status_order, ['completed',]))
                             bg-success text-white
                         @else
                             bg-light border text-secondary @endif
@@ -194,9 +208,9 @@
                                     <div class="col ps-3">
                                         <h6 class="fw-bold mb-1">Dalam Persiapan</h6>
                                         <small class="text-muted">
-                                            @if($order->status_order == 'accepted')
+                                            @if($order->status_order == 'acc' && $order->status_payment == 'paid')
                                             Pesanan sedang disiapkan
-                                            @elseif(in_array($order->status_order, ['completed','cancelled']))
+                                            @elseif(in_array($order->status_order, ['completed']) && $order->status_payment == 'paid')
                                             Pesanan telah disiapkan
                                             @else
                                                 Menunggu konfirmasi pesanan
@@ -242,7 +256,7 @@
 
 
                     <!-- UPLOAD BUKTI PEMBAYARAN (Jika status acc) -->
-                    @if ($order->status_order === 'acc' && $order->status_payment === '-')
+                    @if (($order->status_order === 'acc' && $order->status_payment === '-') || ($order->status_order === 'acc' && $order->status_payment === 'awaiting_payment'))
                         <div class="card border-0 shadow-sm rounded-4 p-4 mb-4">
                             <div class="d-flex align-items-center mb-3">
                                 <div class="bg-warning bg-opacity-10 rounded-circle p-3 me-3">
@@ -264,7 +278,7 @@
                                         Pembayaran</label>
                                     <select class="form-select rounded-3" id="payment_method" name="payment_method"
                                         required>
-                                        <option value="">-- Pilih Metode Transfer --</option>
+                                        <option value="">-- Pilih M etode Transfer --</option>
                                         <option value="BCA">BCA</option>
                                         <option value="MANDIRI">MANDIRI</option>
                                         <option value="BRI">BRI</option>

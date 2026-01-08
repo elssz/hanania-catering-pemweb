@@ -119,7 +119,7 @@
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <p class="text-muted small mb-1">Nama Penerima</p>
-                                <p class="fw-semibold">{{ $order->user->name }}</p>
+                                <p class="fw-semibold">{{ $order->user->nama }}</p>
                             </div>
                             <div class="col-md-6">
                                 <p class="text-muted small mb-1">Nomor Telepon</p>
