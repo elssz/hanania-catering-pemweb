@@ -35,9 +35,10 @@
 
                         <!-- IMAGE -->
                         <img 
-                            src="{{ asset('images/menu-placeholder.jpg') }}" 
+                            src="{{ asset( $menu->gambar) }}" 
                             class="card-img-top rounded-top-4"
                             alt="{{ $menu->namaMenu }}"
+                            style="height: 200px; object-fit: cover;"
                         >
 
                         <!-- BODY -->
