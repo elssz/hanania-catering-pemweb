@@ -88,8 +88,8 @@
                                 <div class="row">
                                     <div class="col-auto">
                                         <div class="timeline-marker
-                        {{ in_array($order->status_order, ['pending','acc','completed','cancelled']) 
-                            ? 'bg-success text-white' 
+                        {{ in_array($order->status_order, ['pending','acc','completed','cancelled'])
+                            ? 'bg-success text-white'
                             : 'bg-light border text-secondary' }}
                         rounded-circle d-flex align-items-center justify-content-center"
                                             style="width:40px;height:40px;">
@@ -211,8 +211,8 @@
                                 <div class="row">
                                     <div class="col-auto">
                                         <div class="timeline-marker
-                        {{ $order->status_order == 'completed' 
-                            ? 'bg-success text-white' 
+                        {{ $order->status_order == 'completed'
+                            ? 'bg-success text-white'
                             : 'bg-light border text-secondary' }}
                         rounded-circle d-flex align-items-center justify-content-center"
                                             style="width:40px;height:40px;">
@@ -237,7 +237,7 @@
 
                     <!-- BUTTON DONE -->
                     @if($order->status_order === 'acc' && $order->status_payment === '-')
-                    
+
                     @endif
 
 
@@ -373,7 +373,7 @@
                             <a href="{{ route('menu') }}" class="btn btn-outline-secondary rounded-pill fw-semibold">
                                 <i class="bi bi-plus-circle"></i> Lanjut Belanja
                             </a>
-                            @if ($order->status_order === 'acc' || $order->status_order === 'completed')
+                            @if ($order->status_order === 'completed')
                                 @if ($order->review)
                                     <button type="button" class="btn btn-outline-warning rounded-pill fw-semibold"
                                         data-bs-toggle="modal" data-bs-target="#editReviewModal-{{ $order->id }}">

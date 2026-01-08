@@ -51,7 +51,7 @@
                             <small class="text-muted d-block mb-1">Status Order</small>
                             <span
                                 class="badge
-                            @if ($order->status_order === 'acc' or $order->status_order === 'completed') bg-success
+                            @if ($order->status_order === 'completed') bg-success
                             @elseif($order->status_order === 'processing')
                                 bg-primary
                             @elseif($order->status_order === 'pending')
@@ -144,7 +144,7 @@
                                 Lihat Detail
                             </a>
                             {{-- Kasih ulasan --}}
-                            @if (($order->status_order === 'acc' || $order->status_order === 'completed') && $trxStatus === 'verified')
+                            @if (($order->status_order === 'completed') && $trxStatus === 'verified')
                                 @if ($order->review)
                                     <button type="button" class="btn btn-sm btn-warning text-white rounded-pill ms-2"
                                         data-bs-toggle="modal" data-bs-target="#editReviewModal-{{ $order->id }}">

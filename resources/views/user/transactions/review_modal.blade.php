@@ -1,6 +1,6 @@
     @foreach ($orders as $order)
             @if (
-                ($order->status_order === 'acc' || $order->status_order === 'completed') &&
+                ( $order->status_order === 'completed') &&
                     optional($order->transaction)->status === 'verified')
                     {{-- update --}}
                 @if ($order->review)
