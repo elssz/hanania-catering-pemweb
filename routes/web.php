@@ -95,6 +95,7 @@ Route::get('/orders/{order}', [TransactionController::class, 'showOrder'])
 Route::post('/orders/{order}/upload-proof', [TransactionController::class, 'uploadProof'])
     ->middleware('auth')->name('orders.uploadProof');
 
+// Review
 Route::post('/reviews', [ReviewController::class, 'store'])
     ->middleware('auth')->name('reviews.store');
 Route::put('/reviews/{review}', [ReviewController::class, 'update'])

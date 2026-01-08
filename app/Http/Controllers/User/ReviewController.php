@@ -25,7 +25,7 @@ class ReviewController extends Controller
         }
 
         $photoPath = null;
-
+        // Menambahkan foto
         if ($request->hasFile('proof')) {
             $file = $request->file('proof');
             $filename = 'review_' . $order->id . '_' . time() . '.' . $file->getClientOriginalExtension();
@@ -66,6 +66,7 @@ class ReviewController extends Controller
             'comment' => $request->comment,
         ];
 
+        // mengecek foto ada atau tidak
         if ($request->hasFile('proof')) {
             // Hapus foto lama (kalau ada)
             if ($review->proof && file_exists(public_path($review->proof))) {

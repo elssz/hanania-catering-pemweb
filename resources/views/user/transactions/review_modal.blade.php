@@ -20,7 +20,7 @@
 
                                     <div class="modal-body">
                                         <p class="text-center text-muted mb-2">Ubah penilaian Anda:</p>
-
+                                        {{-- mengisi bintang yang ada pada database  --}}
                                         <div class="rating mb-3">
                                             @for ($i = 5; $i >= 1; $i--)
                                                 <input type="radio" name="rating" value="{{ $i }}"
@@ -57,6 +57,7 @@
                             </div>
                         </div>
                     </div>
+                    {{-- Create --}}
                 @else
                     <div class="modal fade" id="reviewModal-{{ $order->id }}" tabindex="-1" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
@@ -70,6 +71,7 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                     </div>
                                     <div class="modal-body">
+                                        {{-- Bintang --}}
                                         <p class="text-center text-muted mb-2">Bagaimana pengalaman pesanan Anda?</p>
                                         <div class="rating mb-3">
                                             <input type="radio" name="rating" value="5"
