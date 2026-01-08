@@ -7,32 +7,32 @@
                 <div class="mb-3">
                     <i class="bi bi-check-circle-fill text-success" style="font-size: 3rem;"></i>
                 </div>
-                @if ($order->status_order === 'pending'&& $order->status_payment === '-')
-                <h2 class="fw-bold text-bata mb-2">Pesanan Berhasil Dibuat!</h2>
-                <p class="text-muted">Pesanan Anda sedang menunggu konfirmasi dari Hanania</p>
+                @if ($order->status_order === 'pending' && $order->status_payment === '-')
+                    <h2 class="fw-bold text-bata mb-2">Pesanan Berhasil Dibuat!</h2>
+                    <p class="text-muted">Pesanan Anda sedang menunggu konfirmasi dari Hanania</p>
                 @elseif ($order->status_order === 'acc' && $order->status_payment === '-')
-                <h2 class="fw-bold text-bata mb-2">Pesanan Telah Disetujui Admin!</h2>
-                <p class="text-muted">Pesanan Anda telah disetujui, Silahkan melakukan Pembayaran!</p>
+                    <h2 class="fw-bold text-bata mb-2">Pesanan Telah Disetujui Admin!</h2>
+                    <p class="text-muted">Pesanan Anda telah disetujui, Silahkan melakukan Pembayaran!</p>
                 @elseif ($order->status_order === 'acc' && $order->status_payment === 'pending')
-                <h2 class="fw-bold text-bata mb-2">Bukti Bayar Telah Terkirim!</h2>
-                <p class="text-muted">Admin cek duluu, yaw!</p>
+                    <h2 class="fw-bold text-bata mb-2">Bukti Bayar Telah Terkirim!</h2>
+                    <p class="text-muted">Admin cek duluu, yaw!</p>
                 @elseif ($order->status_order === 'acc' && $order->status_payment === 'awaiting_payment')
-                <h2 class="fw-bold text-bata mb-2">Bukti Bayar ditolak!</h2>
-                <p class="text-muted">Mohon maaf, bukti bayar tidak sesuai! Kirim Ulang Bukti Bayar</p>
+                    <h2 class="fw-bold text-bata mb-2">Bukti Bayar ditolak!</h2>
+                    <p class="text-muted">Mohon maaf, bukti bayar tidak sesuai! Kirim Ulang Bukti Bayar</p>
                 @elseif ($order->status_order === 'acc' && $order->status_payment === 'paid')
-                <h2 class="fw-bold text-bata mb-2">Bukti Bayar Telah diterima!</h2>
-                <p class="text-muted">Pesanan Sedang diproses!</p>
+                    <h2 class="fw-bold text-bata mb-2">Bukti Bayar Telah diterima!</h2>
+                    <p class="text-muted">Pesanan Sedang diproses!</p>
                 @elseif ($order->status_order === 'rejected' && $order->status_payment === '-')
-                <h2 class="fw-bold text-bata mb-2">Pesanan Ditolak Admin!</h2>
-                <p class="text-muted">Mohon maaf, pesanan Anda ditolak oleh admin.</p>
-                @elseif ($order->status_order === 'completed'&& $order->status_payment === 'paid')
-                <h2 class="fw-bold text-bata mb-2">Pesanan Sudah Dikirim!</h2>
-                <p class="text-muted">Pesanan Sudah Siap!</p>
+                    <h2 class="fw-bold text-bata mb-2">Pesanan Ditolak Admin!</h2>
+                    <p class="text-muted">Mohon maaf, pesanan Anda ditolak oleh admin.</p>
+                @elseif ($order->status_order === 'completed' && $order->status_payment === 'paid')
+                    <h2 class="fw-bold text-bata mb-2">Pesanan Sudah Dikirim!</h2>
+                    <p class="text-muted">Pesanan Sudah Siap!</p>
                 @elseif ($order->status_order === 'cancelled')
-                <h2 class="fw-bold text-bata mb-2">Pesanan telah dibatalkan!</h2>
-                <p class="text-muted">Pesanan Anda telah dibatalkan oleh admin.</p>
+                    <h2 class="fw-bold text-bata mb-2">Pesanan telah dibatalkan!</h2>
+                    <p class="text-muted">Pesanan Anda telah dibatalkan oleh admin.</p>
                 @else
-                <p class="badge bg-secondary">Unknown</p>
+                    <p class="badge bg-secondary">Unknown</p>
                 @endif
 
             </div>
@@ -47,32 +47,32 @@
                                 <p class="text-muted small mb-1">Nomor Pesanan</p>
                                 <h5 class="fw-bold text-bata">#ORD-{{ str_pad($order->id, 5, '0', STR_PAD_LEFT) }}</h5>
                             </div>
-                            @if($order->status_order == 'pending')
-                            <span class="badge bg-warning text-dark">
-                                <i class="bi bi-clock"></i> Menunggu Konfirmasi
-                            </span>
+                            @if ($order->status_order == 'pending')
+                                <span class="badge bg-warning text-dark">
+                                    <i class="bi bi-clock"></i> Menunggu Konfirmasi
+                                </span>
                             @elseif($order->status_order == 'acc' && $order->status_payment == 'pending')
-                            <span class="badge bg-warning text-dark">
-                                <i class="bi bi-credit-card"></i> Menunggu Konfirmasi Pembayaran
-                            </span>
+                                <span class="badge bg-warning text-dark">
+                                    <i class="bi bi-credit-card"></i> Menunggu Konfirmasi Pembayaran
+                                </span>
                             @elseif($order->status_order == 'acc' && $order->status_payment == 'paid')
-                            <span class="badge bg-primary">
-                                <i class="bi bi-hourglass-split"></i> Diproses
-                            </span>
+                                <span class="badge bg-primary">
+                                    <i class="bi bi-hourglass-split"></i> Diproses
+                                </span>
                             @elseif($order->status_order == 'completed')
-                            <span class="badge bg-success">
-                                <i class="bi bi-check-circle"></i> Selesai
-                            </span>
+                                <span class="badge bg-success">
+                                    <i class="bi bi-check-circle"></i> Selesai
+                                </span>
                             @elseif($order->status == 'rejected')
-                            <span class="badge bg-success">
-                                <i class="bi bi-check-circle"></i> Ditolak
-                            </span>
+                                <span class="badge bg-success">
+                                    <i class="bi bi-check-circle"></i> Ditolak
+                                </span>
                             @elseif($order->status_order == 'cancelled')
-                            <span class="badge bg-success">
-                                <i class="bi bi-check-circle"></i> Dibatalkan
-                            </span>
+                                <span class="badge bg-success">
+                                    <i class="bi bi-check-circle"></i> Dibatalkan
+                                </span>
                             @else
-                            <span class="badge bg-danger">Unkwon</span>
+                                <span class="badge bg-danger">Unkwon</span>
                             @endif
                         </div>
                     </div>
@@ -88,8 +88,8 @@
                                 <div class="row">
                                     <div class="col-auto">
                                         <div class="timeline-marker
-                        {{ in_array($order->status, ['pending','accepted','completed','shipped']) 
-                            ? 'bg-success text-white' 
+                        {{ in_array($order->status, ['pending', 'accepted', 'completed', 'shipped'])
+                            ? 'bg-success text-white'
                             : 'bg-light border text-secondary' }}
                         rounded-circle d-flex align-items-center justify-content-center"
                                             style="width:40px;height:40px;">
@@ -110,13 +110,11 @@
                                 <div class="row">
                                     <div class="col-auto">
                                         <div class="timeline-marker
-                        @if($order->status == 'pending')
-                            bg-warning text-white
-                        @elseif(in_array($order->status, ['accepted','completed','shipped']))
+                        @if ($order->status == 'pending') bg-warning text-white
+                        @elseif(in_array($order->status, ['accepted', 'completed', 'shipped']))
                             bg-success text-white
                         @else
-                            bg-light border text-secondary
-                        @endif
+                            bg-light border text-secondary @endif
                         rounded-circle d-flex align-items-center justify-content-center"
                                             style="width:40px;height:40px;">
                                             <i class="bi bi-clock"></i>
@@ -125,10 +123,10 @@
                                     <div class="col ps-3">
                                         <h6 class="fw-bold mb-1">Menunggu Konfirmasi</h6>
                                         <small class="text-muted">
-                                            @if($order->status == 'pending')
-                                            Admin sedang memverifikasi pesanan Anda
+                                            @if ($order->status == 'pending')
+                                                Admin sedang memverifikasi pesanan Anda
                                             @else
-                                            Pesanan telah dikonfirmasi
+                                                Pesanan telah dikonfirmasi
                                             @endif
                                         </small>
                                     </div>
@@ -140,13 +138,11 @@
                                 <div class="row">
                                     <div class="col-auto">
                                         <div class="timeline-marker
-                        @if($order->payment_status == 'verified')
-                            bg-success text-white
+                        @if ($order->payment_status == 'verified') bg-success text-white
                         @elseif($order->payment_status == 'pending')
                             bg-warning text-white
                         @else
-                            bg-light border text-secondary
-                        @endif
+                            bg-light border text-secondary @endif
                         rounded-circle d-flex align-items-center justify-content-center"
                                             style="width:40px;height:40px;">
                                             <i class="bi bi-credit-card"></i>
@@ -155,12 +151,12 @@
                                     <div class="col ps-3">
                                         <h6 class="fw-bold mb-1">Pembayaran</h6>
                                         <small class="text-muted">
-                                            @if($order->payment_status == 'paid')
-                                            Pembayaran telah dikonfirmasi
+                                            @if ($order->payment_status == 'paid')
+                                                Pembayaran telah dikonfirmasi
                                             @elseif($order->payment_status == 'pending')
-                                            Menunggu pembayaran dari pelanggan
+                                                Menunggu pembayaran dari pelanggan
                                             @else
-                                            Pembayaran belum dilakukan
+                                                Pembayaran belum dilakukan
                                             @endif
                                         </small>
                                     </div>
@@ -172,13 +168,11 @@
                                 <div class="row">
                                     <div class="col-auto">
                                         <div class="timeline-marker
-                        @if($order->status == 'accepted')
-                            bg-warning text-white
-                        @elseif(in_array($order->status, ['completed','shipped']))
+                        @if ($order->status == 'accepted') bg-warning text-white
+                        @elseif(in_array($order->status, ['completed', 'shipped']))
                             bg-success text-white
                         @else
-                            bg-light border text-secondary
-                        @endif
+                            bg-light border text-secondary @endif
                         rounded-circle d-flex align-items-center justify-content-center"
                                             style="width:40px;height:40px;">
                                             <i class="bi bi-hourglass-split"></i>
@@ -187,12 +181,12 @@
                                     <div class="col ps-3">
                                         <h6 class="fw-bold mb-1">Dalam Persiapan</h6>
                                         <small class="text-muted">
-                                            @if($order->status == 'accepted')
-                                            Pesanan sedang disiapkan
-                                            @elseif(in_array($order->status, ['completed','shipped']))
-                                            Pesanan telah disiapkan
+                                            @if ($order->status == 'accepted')
+                                                Pesanan sedang disiapkan
+                                            @elseif(in_array($order->status, ['completed', 'shipped']))
+                                                Pesanan telah disiapkan
                                             @else
-                                            Menunggu konfirmasi pesanan
+                                                Menunggu konfirmasi pesanan
                                             @endif
                                         </small>
                                     </div>
@@ -204,9 +198,7 @@
                                 <div class="row">
                                     <div class="col-auto">
                                         <div class="timeline-marker
-                        {{ $order->status == 'shipped' 
-                            ? 'bg-success text-white' 
-                            : 'bg-light border text-secondary' }}
+                        {{ $order->status == 'shipped' ? 'bg-success text-white' : 'bg-light border text-secondary' }}
                         rounded-circle d-flex align-items-center justify-content-center"
                                             style="width:40px;height:40px;">
                                             <i class="bi bi-truck"></i>
@@ -215,10 +207,10 @@
                                     <div class="col ps-3">
                                         <h6 class="fw-bold mb-1">Siap Dikirim</h6>
                                         <small class="text-muted">
-                                            @if($order->status == 'shipped')
-                                            Pesanan sedang dalam perjalanan
+                                            @if ($order->status == 'shipped')
+                                                Pesanan sedang dalam perjalanan
                                             @else
-                                            Menunggu pesanan selesai disiapkan
+                                                Menunggu pesanan selesai disiapkan
                                             @endif
                                         </small>
                                     </div>
@@ -230,62 +222,69 @@
 
 
                     <!-- UPLOAD BUKTI PEMBAYARAN (Jika status acc) -->
-                    @if($order->status_order === 'acc' && $order->status_payment === '-')
-                    <div class="card border-0 shadow-sm rounded-4 p-4 mb-4">
-                        <div class="d-flex align-items-center mb-3">
-                            <div class="bg-warning bg-opacity-10 rounded-circle p-3 me-3">
-                                <i class="bi bi-upload text-warning" style="font-size: 1.5rem;"></i>
+                    @if ($order->status_order === 'acc' && $order->status_payment === '-')
+                        <div class="card border-0 shadow-sm rounded-4 p-4 mb-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="bg-warning bg-opacity-10 rounded-circle p-3 me-3">
+                                    <i class="bi bi-upload text-warning" style="font-size: 1.5rem;"></i>
+                                </div>
+                                <div>
+                                    <h5 class="fw-bold text-bata mb-0">Unggah Bukti Pembayaran</h5>
+                                    <small class="text-muted">Pesanan Anda telah disetujui. Harap unggah bukti
+                                        pembayaran Anda.</small>
+                                </div>
                             </div>
-                            <div>
-                                <h5 class="fw-bold text-bata mb-0">Unggah Bukti Pembayaran</h5>
-                                <small class="text-muted">Pesanan Anda telah disetujui. Harap unggah bukti pembayaran Anda.</small>
-                            </div>
+
+                            <!-- FORM UPLOAD -->
+                            <form action="{{ route('orders.uploadProof', $order->id) }}" method="POST"
+                                enctype="multipart/form-data">
+                                @csrf
+                                <div class="mb-3">
+                                    <label for="payment_method" class="form-label fw-semibold">Metode
+                                        Pembayaran</label>
+                                    <select class="form-select rounded-3" id="payment_method" name="payment_method"
+                                        required>
+                                        <option value="">-- Pilih Metode Transfer --</option>
+                                        <option value="BCA">BCA</option>
+                                        <option value="MANDIRI">MANDIRI</option>
+                                        <option value="BRI">BRI</option>
+                                    </select>
+                                    @error('payment_method')
+                                        <small class="text-danger d-block mt-1">{{ $message }}</small>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="proof" class="form-label fw-semibold">Bukti Pembayaran</label>
+                                    <div class="input-group">
+                                        <input type="file" class="form-control rounded-start-3" id="proof"
+                                            name="proof" accept="image/*" required>
+                                        <button class="btn btn-outline-secondary rounded-end-3" type="button"
+                                            id="browse-btn">
+                                            <i class="bi bi-folder-open"></i> Pilih
+                                        </button>
+                                    </div>
+                                    <small class="text-muted d-block mt-1">Format: JPG, PNG, GIF. Maks 2MB</small>
+                                    @error('proof')
+                                        <small class="text-danger d-block mt-1">{{ $message }}</small>
+                                    @enderror
+                                </div>
+
+                                <!-- PREVIEW -->
+                                <div class="mb-3" id="preview-container" style="display: none;">
+                                    <div class="border rounded-3 p-3 text-center">
+                                        <img id="preview-image" src="" alt="Preview"
+                                            style="max-width: 100%; max-height: 200px; border-radius: 8px;">
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-hanania w-100 rounded-pill fw-semibold">
+                                    <i class="bi bi-upload"></i> Unggah Bukti Pembayaran
+                                </button>
+                            </form>
                         </div>
-
-                        <!-- FORM UPLOAD -->
-                        <form action="{{ route('orders.uploadProof', $order->id) }}" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            <div class="mb-3">
-                                <label for="payment_method" class="form-label fw-semibold">Metode Pembayaran</label>
-                                <select class="form-select rounded-3" id="payment_method" name="payment_method" required>
-                                    <option value="">-- Pilih Metode Transfer --</option>
-                                    <option value="BCA">BCA</option>
-                                    <option value="MANDIRI">MANDIRI</option>
-                                    <option value="BRI">BRI</option>
-                                </select>
-                                @error('payment_method')
-                                <small class="text-danger d-block mt-1">{{ $message }}</small>
-                                @enderror
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="proof" class="form-label fw-semibold">Bukti Pembayaran</label>
-                                <div class="input-group">
-                                    <input type="file" class="form-control rounded-start-3" id="proof" name="proof" accept="image/*" required>
-                                    <button class="btn btn-outline-secondary rounded-end-3" type="button" id="browse-btn">
-                                        <i class="bi bi-folder-open"></i> Pilih
-                                    </button>
-                                </div>
-                                <small class="text-muted d-block mt-1">Format: JPG, PNG, GIF. Maks 2MB</small>
-                                @error('proof')
-                                <small class="text-danger d-block mt-1">{{ $message }}</small>
-                                @enderror
-                            </div>
-
-                            <!-- PREVIEW -->
-                            <div class="mb-3" id="preview-container" style="display: none;">
-                                <div class="border rounded-3 p-3 text-center">
-                                    <img id="preview-image" src="" alt="Preview" style="max-width: 100%; max-height: 200px; border-radius: 8px;">
-                                </div>
-                            </div>
-
-                            <button type="submit" class="btn btn-hanania w-100 rounded-pill fw-semibold">
-                                <i class="bi bi-upload"></i> Unggah Bukti Pembayaran
-                            </button>
-                        </form>
-                    </div>
                     @else
-                    <!-- Jika bukan status acc, tidak perlu tampilkan upload -->
+                        <!-- Jika bukan status acc, tidak perlu tampilkan upload -->
                     @endif
 
                     <!-- DATA PENGIRIMAN -->
@@ -315,16 +314,18 @@
 
                         <!-- DETAIL ITEM -->
                         <div class="mb-3" style="max-height: 300px; overflow-y: auto;">
-                            @foreach($order->items as $item)
-                            <div class="d-flex justify-content-between mb-3 pb-3 border-bottom">
-                                <div>
-                                    <p class="fw-semibold small mb-1">{{ $item->menu->namaMenu }}</p>
-                                    <small class="text-muted">{{ $item->quantity }} × Rp {{ number_format($item->price, 0, ',', '.') }}</small>
+                            @foreach ($order->items as $item)
+                                <div class="d-flex justify-content-between mb-3 pb-3 border-bottom">
+                                    <div>
+                                        <p class="fw-semibold small mb-1">{{ $item->menu->namaMenu }}</p>
+                                        <small class="text-muted">{{ $item->quantity }} × Rp
+                                            {{ number_format($item->price, 0, ',', '.') }}</small>
+                                    </div>
+                                    <div class="text-end">
+                                        <p class="fw-bold small text-bata">Rp
+                                            {{ number_format($item->subtotal, 0, ',', '.') }}</p>
+                                    </div>
                                 </div>
-                                <div class="text-end">
-                                    <p class="fw-bold small text-bata">Rp {{ number_format($item->subtotal, 0, ',', '.') }}</p>
-                                </div>
-                            </div>
                             @endforeach
                         </div>
 
@@ -339,7 +340,8 @@
                         </div>
                         <div class="d-flex justify-content-between">
                             <span class="fw-bold text-bata fs-5">Total</span>
-                            <span class="fw-bold text-bata fs-5">Rp {{ number_format($order->total, 0, ',', '.') }}</span>
+                            <span class="fw-bold text-bata fs-5">Rp
+                                {{ number_format($order->total, 0, ',', '.') }}</span>
                         </div>
                         <hr>
 
@@ -351,6 +353,19 @@
                             <a href="{{ route('menu') }}" class="btn btn-outline-secondary rounded-pill fw-semibold">
                                 <i class="bi bi-plus-circle"></i> Lanjut Belanja
                             </a>
+                            @if ($order->status_order === 'acc' || $order->status_order === 'completed')
+                                @if ($order->review)
+                                    <button type="button" class="btn btn-outline-warning rounded-pill fw-semibold"
+                                        data-bs-toggle="modal" data-bs-target="#editReviewModal-{{ $order->id }}">
+                                        <i class="bi bi-pencil-square"></i> Edit Ulasan
+                                    </button>
+                                @else
+                                    <button type="button" class="btn btn-outline-primary rounded-pill fw-semibold"
+                                        data-bs-toggle="modal" data-bs-target="#reviewModal-{{ $order->id }}">
+                                        <i class="bi bi-star-fill"></i> Beri Ulasan
+                                    </button>
+                                @endif
+                            @endif
                         </div>
 
                         <!-- INFO -->
@@ -403,4 +418,8 @@
             document.getElementById('proof').click();
         });
     </script>
+
+    @push('modals')
+        @include('user.transactions.review_modal', ['orders' => [$order]])
+    @endpush
 </x-layout>

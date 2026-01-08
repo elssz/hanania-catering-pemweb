@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\User\ReviewController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -93,6 +94,11 @@ Route::get('/orders/{order}', [TransactionController::class, 'showOrder'])
 
 Route::post('/orders/{order}/upload-proof', [TransactionController::class, 'uploadProof'])
     ->middleware('auth')->name('orders.uploadProof');
+
+Route::post('/reviews', [ReviewController::class, 'store'])
+    ->middleware('auth')->name('reviews.store');
+Route::put('/reviews/{review}', [ReviewController::class, 'update'])
+    ->middleware('auth')->name('reviews.update');
 
 
 //cart.add

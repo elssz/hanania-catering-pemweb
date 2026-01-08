@@ -1,482 +1,529 @@
 :root {
-  --cream: #f0eed1;
-  --salmon: #d57c73;
-  --warmred: #c65c55;
-  --bata: #a34740;
+    --cream: #f0eed1;
+    --salmon: #d57c73;
+    --warmred: #c65c55;
+    --bata: #a34740;
 }
 
 /* General */
 body {
-  font-family: 'Poppins', sans-serif;
-  background-color: var(--cream);
-  color: #3b3b3b;
+    font-family: "Poppins", sans-serif;
+    background-color: var(--cream);
+    color: #3b3b3b;
 }
 
 /* Navbar */
 .navbar {
-  background-color: var(--bata);
+    background-color: var(--bata);
 }
 .navbar-brand {
-  font-weight: 600;
-  color: #fff !important;
+    font-weight: 600;
+    color: #fff !important;
 }
 
 /* Hero */
 .hero {
-  background-color: var(--warmred);
-  padding: 80px 0;
+    background-color: var(--warmred);
+    padding: 80px 0;
 }
 .hero h1 {
-  font-family: 'Playfair Display', serif;
+    font-family: "Playfair Display", serif;
 }
 .hero .btn {
-  border-radius: 30px;
+    border-radius: 30px;
 }
 .hero img {
-  border: none !important;
-  box-shadow: none !important;
+    border: none !important;
+    box-shadow: none !important;
 }
 
 /* ======== KATEGORI CARD ======== */
 .kategori .card {
-  border: none;
-  border-radius: 15px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  overflow: hidden;
-  transition: transform 0.3s ease;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
 }
 
 .kategori .card:hover {
-  transform: translateY(-5px);
+    transform: translateY(-5px);
 }
 
 .kategori .card img {
-  width: 100%;
-  height: 250px;
-  object-fit: cover;
-  object-position: center;
-  border-bottom: 3px solid #fff5e1;
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    object-position: center;
+    border-bottom: 3px solid #fff5e1;
 }
 
 .kategori .card-body {
-  background-color: #fff;
-  text-align: center;
-  padding: 18px 15px;
+    background-color: #fff;
+    text-align: center;
+    padding: 18px 15px;
 }
 
 /* Judul paket */
 .kategori .card-title {
-  font-weight: 700;          /* tebal banget */
-  color: #3b2a28;            /* warna coklat tua biar natural */
-  font-size: 1.1rem;
-  margin-bottom: 6px;
+    font-weight: 700; /* tebal banget */
+    color: #3b2a28; /* warna coklat tua biar natural */
+    font-size: 1.1rem;
+    margin-bottom: 6px;
 }
 
 /* Deskripsi paket */
 .kategori .card-text {
-  color: #666;               /* abu-abu lembut */
-  font-size: 0.9rem;
-  line-height: 1.4;
-  font-weight: 400;          /* normal */
+    color: #666; /* abu-abu lembut */
+    font-size: 0.9rem;
+    line-height: 1.4;
+    font-weight: 400; /* normal */
 }
 
 /* ======== CUSTOM BUTTON HANANIA ======== */
 .btn-hanania {
-  background-color: #C65C55;     /* merah hangat dari palet */
-  color: #fff;
-  border: none;
-  border-radius: 25px;
-  transition: all 0.3s ease;
+    background-color: #c65c55; /* merah hangat dari palet */
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    transition: all 0.3s ease;
 }
 
 .btn-hanania:hover {
-  background-color: #A34740;     /* merah bata saat hover */
-  color: #fff;
-  transform: translateY(-2px);
+    background-color: #a34740; /* merah bata saat hover */
+    color: #fff;
+    transform: translateY(-2px);
 }
-
 
 /* Portofolio */
 .portofolio {
-  background-color: var(--bata);
+    background-color: var(--bata);
 }
 .portofolio .box {
-  width: 60px;
-  height: 60px;
-  background-color: var(--warmred);
-  border-radius: 8px;
+    width: 60px;
+    height: 60px;
+    background-color: var(--warmred);
+    border-radius: 8px;
 }
 
 .portofolio-title {
-  font-family: 'Great Vibes', cursive;
-  font-size: 2.5rem;
-  color: #A34740;
-  text-align: center;
-  margin-bottom: 20px;
+    font-family: "Great Vibes", cursive;
+    font-size: 2.5rem;
+    color: #a34740;
+    text-align: center;
+    margin-bottom: 20px;
 }
-
 
 /* Footer */
 footer {
-  background-color: var(--warmred);
-  margin-top: auto;
-  text-align: center;
- /* mt-auto text-center py-4 text-light;  padding: ;
+    background-color: var(--warmred);
+    margin-top: auto;
+    text-align: center;
+    /* mt-auto text-center py-4 text-light;  padding: ;
   */
 }
 
 /* Animasi Scroll */
 .fade {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: all 0.6s ease;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.6s ease;
 }
 .fade.show {
-  opacity: 1;
-  transform: translateY(0);
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* ======== MENU KATERING PAGE ======== */
-.bg-cream { background-color: #F0EED1; }
-.text-bata { color: #A34740; }
+.bg-cream {
+    background-color: #f0eed1;
+}
+.text-bata {
+    color: #a34740;
+}
 
 .menu-card {
-  border: none;
-  border-radius: 15px;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease;
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
 }
 
 .menu-card:hover {
-  transform: translateY(-6px);
+    transform: translateY(-6px);
 }
 
 .menu-card img {
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
-  object-position: center;
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    object-position: center;
 }
 
 .menu-title {
-  font-weight: 700;
-  color: #3b2a28;
-  margin-bottom: 8px;
+    font-weight: 700;
+    color: #3b2a28;
+    margin-bottom: 8px;
 }
 
 .menu-desc {
-  font-size: 0.9rem;
-  color: #555;
-  margin-bottom: 12px;
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 12px;
 }
-
 
 /* ======== CHAT ADMIN BUTTON ======== */
 .chat-admin-wrapper {
-  position: fixed;
-  bottom: 1px;
-  right: 25px;
-  text-align: center;
-  z-index: 9999;
+    position: fixed;
+    bottom: 1px;
+    right: 25px;
+    text-align: center;
+    z-index: 9999;
 }
 
 /* Tombol bulat */
 .chat-admin {
-  background-color: #ffffff;
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  text-decoration: none;
-  margin: 0 auto; 
+    background-color: #ffffff;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+    margin: 0 auto;
 }
 
 .chat-admin img {
-  width: 40px;
-  height: 40px;
+    width: 40px;
+    height: 40px;
 }
 
 /* Efek hover untuk tombol */
 .chat-admin:hover {
-  transform: translateY(-4px); 
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.4);
+    transform: translateY(-4px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.4);
 }
 
 /* Tulisan di bawah tombol */
 .chat-label {
-  display: block;
-  color: #fffefe;
-  font-weight: 600;
-  font-size: 0.85rem;
-  margin-top: 5px;
-  text-shadow: 1px 1px 2px rgba(16, 12, 12, 0.6);
-  transition: none; 
-  transform: none;  
+    display: block;
+    color: #fffefe;
+    font-weight: 600;
+    font-size: 0.85rem;
+    margin-top: 5px;
+    text-shadow: 1px 1px 2px rgba(16, 12, 12, 0.6);
+    transition: none;
+    transform: none;
 }
 
 /* ======== KONTAK & BANTUAN BUTTON ======== */
 .contact-help-wrapper {
-  position: fixed;
-  bottom: 100px;
-  right: 10px;
-  text-align: center;
-  z-index: 9998;
+    position: fixed;
+    bottom: 100px;
+    right: 10px;
+    text-align: center;
+    z-index: 9998;
 }
 
 .contact-help {
-  background-color: #A34740;
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  margin-left: 29%; 
+    background-color: #a34740;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-left: 29%;
 }
 
 .contact-help img {
-  width: 40px;
-  height: 45px;
-  filter: brightness(3) invert(1);
+    width: 40px;
+    height: 45px;
+    filter: brightness(3) invert(1);
 }
 
 .contact-help:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.4);
+    transform: translateY(-4px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.4);
 }
 
 .contact-help-label {
-  display: block;
-  color: #fffefe;
-  font-weight: 600;
-  font-size: 0.85rem;
-  margin-top: 8px;
-  text-shadow: 1px 1px 2px rgba(16, 12, 12, 0.6);
+    display: block;
+    color: #fffefe;
+    font-weight: 600;
+    font-size: 0.85rem;
+    margin-top: 8px;
+    text-shadow: 1px 1px 2px rgba(16, 12, 12, 0.6);
 }
-
 
 /* ======== KATEGORI CARD ======== */
 .kategori .card {
-  border: none;
-  border-radius: 15px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  overflow: hidden;
-  transition: transform 0.3s ease;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
 }
 
 .kategori .card:hover {
-  transform: translateY(-5px);
+    transform: translateY(-5px);
 }
 
 .kategori .card img {
-  width: 100%;
-  height: 250px;
-  object-fit: cover;
-  object-position: center;
-  border-bottom: 3px solid #fff5e1;
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    object-position: center;
+    border-bottom: 3px solid #fff5e1;
 }
 
 .kategori .card-body {
-  background-color: #fff;
-  text-align: center;
-  padding: 18px 15px;
+    background-color: #fff;
+    text-align: center;
+    padding: 18px 15px;
 }
 
 /* Judul paket */
 .kategori .card-title {
-  font-weight: 700;          /* tebal banget */
-  color: #3b2a28;            /* warna coklat tua biar natural */
-  font-size: 1.1rem;
-  margin-bottom: 6px;
+    font-weight: 700; /* tebal banget */
+    color: #3b2a28; /* warna coklat tua biar natural */
+    font-size: 1.1rem;
+    margin-bottom: 6px;
 }
 
 /* Deskripsi paket */
 .kategori .card-text {
-  color: #666;               /* abu-abu lembut */
-  font-size: 0.9rem;
-  line-height: 1.4;
-  font-weight: 400;          /* normal */
+    color: #666; /* abu-abu lembut */
+    font-size: 0.9rem;
+    line-height: 1.4;
+    font-weight: 400; /* normal */
 }
 
 /* ======== CUSTOM BUTTON HANANIA ======== */
 .btn-hanania {
-  background-color: #C65C55;     /* merah hangat dari palet */
-  color: #fff;
-  border: none;
-  border-radius: 25px;
-  transition: all 0.3s ease;
+    background-color: #c65c55; /* merah hangat dari palet */
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    transition: all 0.3s ease;
 }
 
 .btn-hanania:hover {
-  background-color: #A34740;     /* merah bata saat hover */
-  color: #fff;
-  transform: translateY(-2px);
+    background-color: #a34740; /* merah bata saat hover */
+    color: #fff;
+    transform: translateY(-2px);
 }
-
 
 /* Portofolio */
 .portofolio {
-  background-color: var(--bata);
+    background-color: var(--bata);
 }
 .portofolio .box {
-  width: 60px;
-  height: 60px;
-  background-color: var(--warmred);
-  border-radius: 8px;
+    width: 60px;
+    height: 60px;
+    background-color: var(--warmred);
+    border-radius: 8px;
 }
 
 .portofolio-title {
-  font-family: 'Great Vibes', cursive;
-  font-size: 2.5rem;
-  color: #A34740;
-  text-align: center;
-  margin-bottom: 20px;
+    font-family: "Great Vibes", cursive;
+    font-size: 2.5rem;
+    color: #a34740;
+    text-align: center;
+    margin-bottom: 20px;
 }
-
 
 /* Footer */
 footer {
-  background-color: var(--warmred);
+    background-color: var(--warmred);
 }
 
 /* Animasi Scroll */
 .fade {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: all 0.6s ease;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.6s ease;
 }
 .fade.show {
-  opacity: 1;
-  transform: translateY(0);
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* ======== MENU KATERING PAGE ======== */
-.bg-cream { background-color: #F0EED1; }
-.text-bata { color: #A34740; }
+.bg-cream {
+    background-color: #f0eed1;
+}
+.text-bata {
+    color: #a34740;
+}
 
 .menu-card {
-  border: none;
-  border-radius: 15px;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease;
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
 }
 
 .menu-card:hover {
-  transform: translateY(-6px);
+    transform: translateY(-6px);
 }
 
 .menu-card img {
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
-  object-position: center;
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    object-position: center;
 }
 
 .menu-title {
-  font-weight: 700;
-  color: #3b2a28;
-  margin-bottom: 8px;
+    font-weight: 700;
+    color: #3b2a28;
+    margin-bottom: 8px;
 }
 
 .menu-desc {
-  font-size: 0.9rem;
-  color: #555;
-  margin-bottom: 12px;
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 12px;
 }
 
 /* ======== CHAT ADMIN BUTTON ======== */
 .chat-admin-wrapper {
-  position: fixed;
-  bottom: 1px;
-  right: 25px;
-  text-align: center;
-  z-index: 9999;
+    position: fixed;
+    bottom: 1px;
+    right: 25px;
+    text-align: center;
+    z-index: 9999;
 }
 
 /* Tombol bulat */
 .chat-admin {
-  background-color: #ffffff;
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  text-decoration: none;
-  margin: 0 auto; 
+    background-color: #ffffff;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+    margin: 0 auto;
 }
 
 .chat-admin img {
-  width: 40px;
-  height: 40px;
+    width: 40px;
+    height: 40px;
 }
 
 /* Efek hover untuk tombol */
 .chat-admin:hover {
-  transform: translateY(-4px); 
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.4);
+    transform: translateY(-4px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.4);
 }
 
 /* Tulisan di bawah tombol */
 .chat-label {
-  display: block;
-  color: #fffefe;
-  font-weight: 600;
-  font-size: 0.85rem;
-  margin-top: 5px;
-  text-shadow: 1px 1px 2px rgba(16, 12, 12, 0.6);
-  transition: none; 
-  transform: none;  
+    display: block;
+    color: #fffefe;
+    font-weight: 600;
+    font-size: 0.85rem;
+    margin-top: 5px;
+    text-shadow: 1px 1px 2px rgba(16, 12, 12, 0.6);
+    transition: none;
+    transform: none;
 }
 
 /* ======== KONTAK & BANTUAN BUTTON ======== */
 .contact-help-wrapper {
-  position: fixed;
-  bottom: 100px;
-  right: 10px;
-  text-align: center;
-  z-index: 9998;
+    position: fixed;
+    bottom: 100px;
+    right: 10px;
+    text-align: center;
+    z-index: 9998;
 }
 
 .contact-help {
-  background-color: #A34740;
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  margin-left: 29%; 
+    background-color: #a34740;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-left: 29%;
 }
 
 .contact-help img {
-  width: 40px;
-  height: 45px;
-  filter: brightness(3) invert(1);
+    width: 40px;
+    height: 45px;
+    filter: brightness(3) invert(1);
 }
 
 .contact-help:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.4);
+    transform: translateY(-4px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.4);
 }
 
 .contact-help-label {
-  display: block;
-  color: #fffefe;
-  font-weight: 600;
-  font-size: 0.85rem;
-  margin-top: 8px;
-  text-shadow: 1px 1px 2px rgba(16, 12, 12, 0.6);
+    display: block;
+    color: #fffefe;
+    font-weight: 600;
+    font-size: 0.85rem;
+    margin-top: 8px;
+    text-shadow: 1px 1px 2px rgba(16, 12, 12, 0.6);
+}
+
+.modal-backdrop {
+    z-index: 1040 !important;
+    opacity: 0 !important;
+}
+
+/* 2. Pastikan Modal Dialog ada DI DEPAN Backdrop */
+.modal {
+    z-index: 1050 !important;
+}
+
+.modal-dialog {
+    z-index: 1060 !important; /* Angka lebih besar dari backdrop */
+}
+
+/* 3. Pencegahan Tambahan: Reset Transform */
+.modal.fade .modal-dialog {
+    transform: none !important; /* Matikan animasi slide jika bikin error */
+}
+
+.rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+}
+
+.rating input {
+    display: none;
+}
+
+.rating label {
+    font-size: 2rem;
+    color: #ddd;
+    cursor: pointer;
+}
+
+.rating input:checked ~ label {
+    color: #ffc107;
+}
+
+/* Warna Kuning */
+.rating label:hover,
+.rating label:hover ~ label {
+    color: #ffc107;
 }

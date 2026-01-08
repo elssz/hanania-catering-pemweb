@@ -17,7 +17,7 @@ class TransactionController extends Controller
 
         // Show orders that belong to the authenticated user.
         // Load items and related menu plus any associated transaction.
-        $orders = Order::with('items.menu', 'transaction')
+        $orders = Order::with('items.menu', 'transaction', 'review')
             ->where('user_id', $userId)
             ->latest()
             ->get();
@@ -73,12 +73,12 @@ class TransactionController extends Controller
                 mkdir($path, 0755, true);
             }
             $file->move($path, $filename);
-            
+
             //upload img gambar
             $transaction->proof = 'images/bukti_bayar/' . $filename;
             $transaction->status = 'pending';
             $transaction->save();
-    
+
             // update order payment status
             $order->status_payment = 'pending';
             $order->save();
