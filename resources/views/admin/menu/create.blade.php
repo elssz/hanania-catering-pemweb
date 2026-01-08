@@ -13,7 +13,7 @@
         @endif
 
         <div class="card p-4">
-            <form action="{{ route('admin.menus.store') }}" method="POST">
+            <form action="{{ route('admin.menus.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <div class="mb-3">
@@ -29,6 +29,12 @@
                 <div class="mb-3">
                     <label class="form-label">Kategori</label>
                     <input type="text" name="kategori" class="form-control" value="{{ old('kategori') }}" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Foto Menu</label>
+                    <input type="file" name="gambar" class="form-control" accept="image/*" required>
+                    <small class="text-muted">Format: jpg, jpeg, png. Maksimal 2MB.</small>
                 </div>
 
                 <button class="btn btn-primary">Simpan</button>
