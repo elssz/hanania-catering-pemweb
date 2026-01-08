@@ -24,7 +24,7 @@
 
                 <div class="mb-3">
                     <label class="form-label">Harga</label>
-                    <input type="number" name="harga" class="form-control" value="{{ old('harga', $menu->harga) }}" required>
+                    <input type="number" name="harga" class="form-control" min="0" value="{{ old('harga', $menu->harga) }}" required>
                 </div>
 
                 <div class="mb-3">

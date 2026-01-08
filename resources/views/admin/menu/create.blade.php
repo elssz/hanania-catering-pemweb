@@ -3,13 +3,13 @@
         <h2>Tambah Menu</h2>
 
         @if($errors->any())
-            <div class="alert alert-danger">
-                <ul class="mb-0">
-                    @foreach($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
+        <div class="alert alert-danger">
+            <ul class="mb-0">
+                @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
         @endif
 
         <div class="card p-4">
@@ -23,12 +23,23 @@
 
                 <div class="mb-3">
                     <label class="form-label">Harga</label>
-                    <input type="number" name="harga" class="form-control" value="{{ old('harga') }}" required>
+                    <input type="number"
+                        name="harga"
+                        class="form-control"
+                        min="0"
+                        value="{{ old('harga') }}"
+                        required>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Kategori</label>
-                    <input type="text" name="kategori" class="form-control" value="{{ old('kategori') }}" required>
+                    <select name="kategori" class="form-select" required>
+                        <option value="" disabled selected>-- Pilih Kategori --</option>
+                        <option value="Paket Makanan" {{ old('kategori') == 'Paket Makanan' ? 'selected' : '' }}>Paket Makanan</option>
+                        <option value="Paket Minuman" {{ old('kategori') == 'Paket Minuman' ? 'selected' : '' }}>Paket Minuman</option>
+                        <option value="Paket Snack" {{ old('kategori') == 'Paket Snack' ? 'selected' : '' }}>Paket Snack</option>
+                        <option value="Paket Tumpeng" {{ old('kategori') == 'Paket Tumpeng' ? 'selected' : '' }}>Paket Tumpeng</option>
+                    </select>
                 </div>
 
                 <div class="mb-3">

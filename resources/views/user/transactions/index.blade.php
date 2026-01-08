@@ -24,6 +24,7 @@
         </h4>
 
         @forelse ($orders as $order)
+            @if($order->status_order !== 'cart')
             <div class="card border-0 shadow-sm rounded-4 mb-4">
                 <div class="card-body p-4">
 
@@ -164,6 +165,7 @@
 
                 </div>
             </div>
+            @endif
 
 
         @empty

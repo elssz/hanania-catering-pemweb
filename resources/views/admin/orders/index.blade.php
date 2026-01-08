@@ -39,7 +39,7 @@
                                     <option value="pending" {{ $o->status_order === 'pending' ? 'selected' : '' }}>Pending</option>
                                     <option value="acc" {{ $o->status_order === 'acc' ? 'selected' : '' }}>Acc</option>
                                     <option value="reject" {{ $o->status_order === 'reject' ? 'selected' : '' }}>Reject</option>
-                                    {{-- <option value="processing" {{ $o->status_order === 'processing' ? 'selected' : '' }}>Processing</option> --}}
+                                    {{-- <option value="delivery" {{ $o->status_order === 'delivery' ? 'selected' : '' }}>Delivery</option> --}}
                                     <option value="completed" {{ $o->status_order === 'completed' ? 'selected' : '' }}>Completed</option>
                                     <option value="cancelled" {{ $o->status_order === 'cancelled' ? 'selected' : '' }}>Cancelled</option>
                                 </select>
