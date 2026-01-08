@@ -26,7 +26,7 @@ class AuthController extends Controller
             'email' => $data['email'],
             'phone' => $data['phone'],
             'password' => Hash::make($data['password']),
-            'role_id' => 2, // default ke role pelanggan
+            'role_id' => 2, 
         ]);
 
         Auth::login($user);
