@@ -29,38 +29,38 @@
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                     <ul class="navbar-nav gap-3">
                         @auth
-                        @if(optional(auth()->user()->role)->name === 'admin')
-                        <li class="nav-item">
-                            <a class="nav-link active" href="{{ route('admin.dashboard') }}">Admin Dashboard</a>
-                        </li>
-                        @endif
+                            @if (optional(auth()->user()->role)->name === 'admin')
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="{{ route('admin.dashboard') }}">Admin Dashboard</a>
+                                </li>
+                            @endif
                         @endauth
 
-                        @if(!auth()->check() || auth()->user()->isPelanggan())
-                        <li class="nav-item">
-                            <a class="nav-link active" href="{{ route('home') }}">Beranda</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('menu') }}">Menu Katering</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('keranjang') }}">Keranjang</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('transaksi-saya') }}">Riwayat</a>
-                        </li>
+                        @if (!auth()->check() || auth()->user()->isPelanggan())
+                            <li class="nav-item">
+                                <a class="nav-link active" href="{{ route('home') }}">Beranda</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('menu') }}">Menu Katering</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('keranjang') }}">Keranjang</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('transaksi-saya') }}">Riwayat</a>
+                            </li>
                         @endif
 
                         @guest
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">Login</a>
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">Login</a>
+                            </li>
                         @endguest
 
                         @auth
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('logout') }}">Logout</a>
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('logout') }}">Logout</a>
+                            </li>
                         @endauth
                     </ul>
                 </div>
@@ -93,6 +93,8 @@
         </footer>
 
     </div>
+    @stack('modals')
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
