@@ -110,7 +110,7 @@
                                 </span>
 
                                 {{-- Foto Menu --}}
-                                <img src="{{ asset('storage/' . ($item->menu->foto ?? 'default.jpg')) }}" alt="Menu"
+                                <img src="{{ asset( $item->menu->gambar) }}"  alt="Menu"
                                     class="rounded-3 me-3" style="width: 50px; height: 50px; object-fit: cover;">
 
 

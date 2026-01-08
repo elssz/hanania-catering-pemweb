@@ -32,6 +32,12 @@
                     <input type="text" name="kategori" class="form-control" value="{{ old('kategori', $menu->kategori) }}" required>
                 </div>
 
+                <div class="mb-3">
+                    <label class="form-label">Foto Menu</label>
+                    <input type="file" name="gambar" class="form-control" accept="image/*" required>
+                    <small class="text-muted">Format: jpg, jpeg, png. Maksimal 2MB.</small>
+                </div>
+
                 <button class="btn btn-primary">Perbarui</button>
                 <a href="{{ route('admin.menus.index') }}" class="btn btn-secondary">Batal</a>
             </form>

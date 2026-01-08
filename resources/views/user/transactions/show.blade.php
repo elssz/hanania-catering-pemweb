@@ -18,7 +18,7 @@
                     <p class="text-muted">Admin cek duluu, yaw!</p>
                 @elseif ($order->status_order === 'acc' && $order->status_payment === 'awaiting_payment')
                     <h2 class="fw-bold text-bata mb-2">Bukti Bayar ditolak!</h2>
-                    <p class="text-muted">Mohon maaf, bukti bayar tidak sesuai! Kirim Ulang Bukti Bayar</p>
+                    <p class="text-muted">Mohon maaf, bukti bayar tidak sesuai!</p>
                 @elseif ($order->status_order === 'acc' && $order->status_payment === 'paid')
                 <h2 class="fw-bold text-bata mb-2">Bukti Bayar Telah diterima!</h2>
                 <p class="text-muted">Pesanan Sedang diproses!</p>
@@ -64,8 +64,8 @@
                                     <i class="bi bi-hourglass-split"></i> Diproses
                                 </span>
                             @elseif($order->status_order == 'acc' && $order->status_payment == 'awaiting_payment')
-                                <span class="badge bg-warning text-dark">
-                                    <i class="bi bi-hourglass-split"></i> Segera lakukan pembayaran ulang
+                                <span class="badge bg-danger white-dark">
+                                    <i class="bi bi-hourglass-split"></i> Pembayaran Ditolak
                                 </span>
                             @elseif($order->status_order == 'completed')
                             <span class="badge bg-success">
@@ -152,7 +152,7 @@
                                         <div class="timeline-marker
                         @if($order->status_payment == 'paid')
                             bg-success text-white
-                        @elseif($order->status_payment == 'pending' || $order->status_order == 'acc')
+                        @elseif( ($order->status_order == 'acc') && ($order->status_payment == '-') )
                             bg-warning text-white
                         @elseif($order->status_payment == 'awaiting_payment')
                             bg-danger text-white
@@ -174,7 +174,7 @@
                                             @elseif($order->status_payment == '-')
                                             Segera lakukan pembayaran
                                             @elseif($order->status_payment == 'awaiting_payment')
-                                            Segera lakukan pembayaran ulang
+                                            Pembayaran ditolak
                                             @else
                                                 Pembayaran belum dilakukan
                                             @endif
@@ -256,11 +256,12 @@
 
 
                     <!-- UPLOAD BUKTI PEMBAYARAN (Jika status acc) -->
-                    @if (($order->status_order === 'acc' && $order->status_payment === '-') || ($order->status_order === 'acc' && $order->status_payment === 'awaiting_payment'))
+                    @if ($order->status_order === 'acc' && $order->status_payment === '-')
                         <div class="card border-0 shadow-sm rounded-4 p-4 mb-4">
                             <div class="d-flex align-items-center mb-3">
                                 <div class="bg-warning bg-opacity-10 rounded-circle p-3 me-3">
                                     <i class="bi bi-upload text-warning" style="font-size: 1.5rem;"></i>
+
                                 </div>
                                 <div>
                                     <h5 class="fw-bold text-bata mb-0">Unggah Bukti Pembayaran</h5>
@@ -278,7 +279,7 @@
                                         Pembayaran</label>
                                     <select class="form-select rounded-3" id="payment_method" name="payment_method"
                                         required>
-                                        <option value="">-- Pilih M etode Transfer --</option>
+                                        <option value="">-- Pilih Metode Transfer --</option>
                                         <option value="BCA">BCA</option>
                                         <option value="MANDIRI">MANDIRI</option>
                                         <option value="BRI">BRI</option>

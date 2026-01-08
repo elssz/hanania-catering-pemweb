@@ -101,16 +101,10 @@
                 </p>
                 </p>
                 <p>
-                    <strong>Alamat:</strong> Jl. Contoh No.123<br />
-                    <strong>No. HP:</strong> 08xxxxxxxxx<br />
+                    <strong>Alamat:</strong> Jl. Tanjung Perak  Gang II No.12 Surabaya Utara <br />
+                    <strong>No. HP:</strong> 08156477865<br />
                     <strong>Media Sosial:</strong> @hananiakatering
                 </p>
-                <div class="d-flex gap-2 mt-3">
-                    <div class="box"></div>
-                    <div class="box"></div>
-                    <div class="box"></div>
-                    <div class="box"></div>
-                </div>
             </div>
         </div>
     </section>
